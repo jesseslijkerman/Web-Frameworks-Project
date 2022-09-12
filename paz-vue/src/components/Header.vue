@@ -1,13 +1,9 @@
 <template>
-<h1>Does "Header "work"?</h1>
+    <h1>The header works</h1>
 </template>
 
 <script>
 export default {
-  name: "Header-item"
+  name: 'PageHeader'
 }
 </script>
-
-<style scoped>
-
-</style>
