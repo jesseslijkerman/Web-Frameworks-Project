@@ -1,19 +1,22 @@
 <template>
-  <Welcome></Welcome>
   <Header></Header>
+  <NavBar></NavBar>
+  <Welcome></Welcome>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import Welcome from "@/components/Welcome";
 import Header from "@/components/Header";
+import NavBar from "@/components/NavBar";
 
 
 export default {
   name: 'App',
   components: {
-    Welcome,
-    Header
+    Header,
+    NavBar,
+    Welcome
   }
 }
 </script>
@@ -25,6 +28,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+body{
+  margin: 0;
+}
+
+h1{
+  margin: 0;
 }
 </style>
