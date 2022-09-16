@@ -7,6 +7,7 @@
     </div>
     <img class="image" id="zeester" src="../assets/zeester.png">
   </div>
+  <p>{{getCurrentDate()}}</p>
 </template>
 
 
@@ -24,7 +25,19 @@ export default {
   name: "Header-item", data() {
     return {
       siteName: "Play & Stay aan Zee",
-      image: "../assets/header.jpg"
+      image: "../assets/header.jpg",
+      currentDate: ""
+    };
+  },
+  methods: {
+    getCurrentDate(){
+      const date = new Date();
+      const options = {
+        dateStyle: "full",
+      }
+      let currentDate = date.toLocaleString("nl-NL", options);
+      console.log(currentDate)
+      return currentDate;
     }
   }
 }
