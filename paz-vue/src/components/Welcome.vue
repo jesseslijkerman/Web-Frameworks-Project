@@ -49,7 +49,9 @@ export default {
 <style scoped>
 .container{
   display:flex;
-  justify-content: center;
+  justify-content: space-between;
+  padding-left: 50px;
+  padding-right: 50px;
 
 }
 
