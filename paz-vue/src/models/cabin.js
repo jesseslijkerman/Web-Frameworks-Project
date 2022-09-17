@@ -1,4 +1,6 @@
-export class Cabin{
+import {Type} from "@/models/type";
+
+export class Cabin {
     id;
     type;
     location;
@@ -6,7 +8,6 @@ export class Cabin{
     image;
     pricePerWeek;
     numAvailable;
-
 
     constructor(id, type, location, description, image, pricePerWeek, numAvailable) {
         this.id = id;
@@ -19,6 +20,8 @@ export class Cabin{
     }
 
     static createSampleCabin(){
-
+        let typeSelector = Math.random() * 5;
+        let locationSelector = Math.random() * 6;
+        let descriptionSelector = Math.random() * 6;
     }
 }
