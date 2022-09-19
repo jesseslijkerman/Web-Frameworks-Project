@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import Welcome from "@/components/Welcome";
 import Header from "@/components/Header";
 import NavBar from "@/components/NavBar";

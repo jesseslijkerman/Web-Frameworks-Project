@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: "Welcome-item", data() {
+  name: "Welcome", data() {
 
   }
 
