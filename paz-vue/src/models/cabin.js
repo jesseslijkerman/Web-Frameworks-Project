@@ -185,7 +185,6 @@ export class Cabin {
                     price = 1500;
             }
         }
-        console.log(pId, type, location, description, image, price, numAvailable);
 
         return new Cabin(pId, type, location, description, image, price, numAvailable);
 
