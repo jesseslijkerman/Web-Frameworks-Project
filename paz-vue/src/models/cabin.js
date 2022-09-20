@@ -33,11 +33,13 @@ export class Cabin {
 
         let type;
         let location;
+        let image;
         let description;
         let price;
 
         let typeSelector = Cabin.getRandomInt(5);
         let locationSelector = Cabin.getRandomInt(6);
+        let imageSelector = Cabin.getRandomInt(6);
         let descriptionSelector = Cabin.getRandomInt(6);
         let numAvailable = Cabin.getRandomInt(20);
 
@@ -77,6 +79,27 @@ export class Cabin {
                 break;
             case 5:
                 location = "De Panne"
+                break;
+        }
+
+        switch (imageSelector) {
+            case 0:
+                image = "@/assets/cabins/WFW_Random0.jpg"
+                break;
+            case 1:
+                image = "@/assets/cabins/WFW_Random1.jpg"
+                break;
+            case 2:
+                image = "@/assets/cabins/WFW_Random2.jpg"
+                break;
+            case 3:
+                image = "@/assets/cabins/WFW_Random3.jpg"
+                break;
+            case 4:
+                image = "@/assets/cabins/WFW_Random4.jpg"
+                break;
+            case 5:
+                image = "@/assets/cabins/WFW_Random5.jpg"
                 break;
         }
 
