@@ -103,7 +103,7 @@ export class Cabin {
                 break;
         }
 
-        if (type === Type.BeachGear.name) {
+        if (type === Type.BeachGear) {
             description = ""
         } else {
             switch (descriptionSelector) {
@@ -128,7 +128,7 @@ export class Cabin {
             }
         }
 
-        if (type === Type.BeachGear.name) {
+        if (type === Type.BeachGear) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 100;
@@ -140,7 +140,7 @@ export class Cabin {
                     price = 150;
                     break;
             }
-        } else if (type === Type.SmallDayTime.name) {
+        } else if (type === Type.SmallDayTime) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 300;
@@ -151,7 +151,7 @@ export class Cabin {
                 case 2:
                     price = 410;
             }
-        } else if (type === Type.SmallLodge.name) {
+        } else if (type === Type.SmallLodge) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 400;
@@ -162,7 +162,7 @@ export class Cabin {
                 case 2:
                     price = 500;
             }
-        } else if (type === Type.LargeLodge.name) {
+        } else if (type === Type.LargeLodge) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 750;
@@ -173,7 +173,7 @@ export class Cabin {
                 case 2:
                     price = 850;
             }
-        } else if (type === Type.FamilyLodge.name) {
+        } else if (type === Type.FamilyLodge) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 1000;
@@ -184,10 +184,10 @@ export class Cabin {
                 case 2:
                     price = 1500;
             }
-
-            console.log(pId, location, description, price, numAvailable, type, image);
-
-            return new Cabin(pId, type, location, description, image, price, numAvailable);
         }
+        console.log(pId, type, location, description, image, price, numAvailable);
+
+        return new Cabin(pId, type, location, description, image, price, numAvailable);
+
     }
 }

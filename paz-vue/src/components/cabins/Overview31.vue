@@ -30,7 +30,8 @@ export default {
   },
   methods: {
     nextId(){
-      return this.lastId + 3;
+      this.lastId = this.lastId + 3;
+      return this.lastId
     }
   }
 }
