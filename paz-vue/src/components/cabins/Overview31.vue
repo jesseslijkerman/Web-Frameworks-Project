@@ -8,11 +8,12 @@
 </template>
 
 <script>
-import {Cabin} from "@/models/cabin";
+import {Cabin} from "@/models/cabin.js";
 
 export default {
   name: "CabinsOverview31",
   created() {
+    console.log(Cabin.createSampleCabin(67));
     this.lastId = 10000
     for (let i = 0; i < 8; i++) {
       this.cabins.push(

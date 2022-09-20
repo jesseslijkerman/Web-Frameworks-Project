@@ -30,6 +30,7 @@ export class Cabin {
     }
 
     static createSampleCabin(pId = 0) {
+
         let type;
         let location;
         let description;
@@ -42,19 +43,19 @@ export class Cabin {
 
         switch (typeSelector) {
             case 0:
-                type = Type.BeachGear.name
+                type = Type.BeachGear
                 break;
             case 1:
-                type = Type.SmallDayTime.name
+                type = Type.SmallDayTime
                 break;
             case 2:
-                type = Type.SmallLodge.name
+                type = Type.SmallLodge
                 break;
             case 3:
-                type = Type.LargeLodge.name
+                type = Type.LargeLodge
                 break;
             case 4:
-                type = Type.FamilyLodge.name
+                type = Type.FamilyLodge
                 break;
         }
 
@@ -160,6 +161,8 @@ export class Cabin {
                 case 2:
                     price = 1500;
             }
+
+            console.log(pId, location, description, price, numAvailable, type, image);
 
             return new Cabin(pId, type, location, description, image, price, numAvailable);
         }
