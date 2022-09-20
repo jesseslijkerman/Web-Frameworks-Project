@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "Header-item", data() {
+  name: "Header", data() {
     return {
       siteName: "Play & Stay aan Zee",
       image: "../assets/header.jpg",
