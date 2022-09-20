@@ -52,6 +52,7 @@ export default {
   justify-content: space-between;
   padding-left: 50px;
   padding-right: 50px;
+  flex-wrap: wrap;
 
 }
 

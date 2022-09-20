@@ -1,4 +1,10 @@
-import {Type} from "@/models/type";
+const Type = {
+    BeachGear: "Beach Gear",
+    SmallDayTime: "Small Day Time",
+    SmallLodge: "Small Lodge",
+    LargeLodge: "Large Lodge",
+    FamilyLodge: "Family Lodge"
+}
 
 export class Cabin {
     id;
@@ -23,17 +29,18 @@ export class Cabin {
         return Math.floor(Math.random() * max);
     }
 
-    static createSampleCabin(){
+    static createSampleCabin(pId = 0) {
         let type;
         let location;
         let description;
+        let price;
 
         let typeSelector = Cabin.getRandomInt(5);
         let locationSelector = Cabin.getRandomInt(6);
         let descriptionSelector = Cabin.getRandomInt(6);
         let numAvailable = Cabin.getRandomInt(20);
 
-        switch (typeSelector){
+        switch (typeSelector) {
             case 0:
                 type = Type.BeachGear.name
                 break;
@@ -51,7 +58,7 @@ export class Cabin {
                 break;
         }
 
-        switch (locationSelector){
+        switch (locationSelector) {
             case 0:
                 location = "Egmond aan Zee"
                 break;
@@ -72,10 +79,10 @@ export class Cabin {
                 break;
         }
 
-        if (type === Type.BeachGear.name){
+        if (type === Type.BeachGear.name) {
             description = ""
         } else {
-            switch (descriptionSelector){
+            switch (descriptionSelector) {
                 case 0:
                     description = "Colorful " + type + " with a great view."
                     break;
@@ -97,7 +104,64 @@ export class Cabin {
             }
         }
 
+        if (type === Type.BeachGear.name) {
+            switch (Cabin.getRandomInt(3)) {
+                case 0:
+                    price = 100;
+                    break;
+                case 1:
+                    price = 120;
+                    break;
+                case 2:
+                    price = 150;
+                    break;
+            }
+        } else if (type === Type.SmallDayTime.name) {
+            switch (Cabin.getRandomInt(3)) {
+                case 0:
+                    price = 300;
+                    break;
+                case 1:
+                    price = 370;
+                    break;
+                case 2:
+                    price = 410;
+            }
+        } else if (type === Type.SmallLodge.name) {
+            switch (Cabin.getRandomInt(3)) {
+                case 0:
+                    price = 400;
+                    break;
+                case 1:
+                    price = 450;
+                    break;
+                case 2:
+                    price = 500;
+            }
+        } else if (type === Type.LargeLodge.name) {
+            switch (Cabin.getRandomInt(3)) {
+                case 0:
+                    price = 750;
+                    break;
+                case 1:
+                    price = 1025;
+                    break;
+                case 2:
+                    price = 850;
+            }
+        } else if (type === Type.FamilyLodge.name) {
+            switch (Cabin.getRandomInt(3)) {
+                case 0:
+                    price = 1000;
+                    break;
+                case 1:
+                    price = 1125;
+                    break;
+                case 2:
+                    price = 1500;
+            }
 
-        return new Cabin(0, type, location, description, );
+            return new Cabin(pId, type, location, description, image, price, numAvailable);
+        }
     }
 }

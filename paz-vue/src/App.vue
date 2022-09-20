@@ -1,13 +1,16 @@
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 <template>
   <Header></Header>
   <NavBar></NavBar>
-  <Welcome></Welcome>
+  <CabinsOverview31></CabinsOverview31>
 </template>
 
 <script>
-import Welcome from "@/components/Welcome";
 import Header from "@/components/Header";
 import NavBar from "@/components/NavBar";
+import CabinsOverview31 from "@/components/cabins/Overview31";
 
 
 export default {
@@ -15,7 +18,7 @@ export default {
   components: {
     Header,
     NavBar,
-    Welcome
+    CabinsOverview31
   }
 }
 </script>
