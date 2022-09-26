@@ -84,22 +84,22 @@ export class Cabin {
 
         switch (imageSelector) {
             case 0:
-                image = "@/assets/cabins/WFW_Random0.jpg"
+                image = require("../assets/cabins/WFW_Random0.jpg")
                 break;
             case 1:
-                image = "@/assets/cabins/WFW_Random1.jpg"
+                image = require("../assets/cabins/WFW_Random1.jpg")
                 break;
             case 2:
-                image = "@/assets/cabins/WFW_Random2.jpg"
+                image = require("../assets/cabins/WFW_Random2.jpg")
                 break;
             case 3:
-                image = "@/assets/cabins/WFW_Random3.jpg"
+                image = require("../assets/cabins/WFW_Random3.jpg")
                 break;
             case 4:
-                image = "@/assets/cabins/WFW_Random4.jpg"
+                image = require("../assets/cabins/WFW_Random4.jpg")
                 break;
             case 5:
-                image = "@/assets/cabins/WFW_Random5.jpg"
+                image = require("../assets/cabins/WFW_Random5.jpg")
                 break;
         }
 
