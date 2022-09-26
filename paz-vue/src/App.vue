@@ -39,4 +39,14 @@ body{
 h1{
   margin: 0;
 }
+
+button{
+  background-color: goldenrod;
+  border: none;
+  padding: 5px;
+}
+
+button:hover{
+  background-color: darkgoldenrod;
+}
 </style>
