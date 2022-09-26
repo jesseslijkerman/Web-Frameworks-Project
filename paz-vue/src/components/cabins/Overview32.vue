@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="scroll">
-      <div class="card" v-for="cabin in cabins" v-bind:key="cabin.id">
+      <div class="card" v-for="cabin in cabins" v-bind:key="cabin.id" @click="selectCabin(cabin)">
         <img :src="cabin.image">
         <p>{{ cabin.type }}</p>
         <p>{{ cabin.location }}</p>
@@ -26,7 +26,8 @@ export default {
   data(){
     return{
       lastId: 0,
-      cabins: []
+      cabins: [],
+      selectedCabin: null
     }
   },
   methods: {
@@ -36,7 +37,12 @@ export default {
     },
     onNewCabin(){
       this.cabins.push(Cabin.createSampleCabin(this.nextId()))
+    },
+    selectCabin(cabin){
+      this.selectedCabin = cabin;
+      console.log(this.selectedCabin)
     }
+
   }
 }
 </script>
@@ -61,7 +67,7 @@ img{
 }
 
 .card{
-  padding-right: 20px;
+  margin-right: 20px;
 }
 
 </style>
