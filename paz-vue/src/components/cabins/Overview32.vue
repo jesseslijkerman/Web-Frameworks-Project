@@ -1,13 +1,14 @@
 <template>
   <div class="container">
     <div class="scroll">
-      <div class="card" v-for="cabin in cabins" v-bind:key="cabin.id" @click="selectCabin(cabin)">
+      <div v-bind:class="['card', { 'selected' : selectedCabin === cabin }]" v-for="cabin in cabins" v-bind:key="cabin.id" @click="selectCabin(cabin)">
         <img :src="cabin.image">
         <p>{{ cabin.type }}</p>
         <p>{{ cabin.location }}</p>
       </div>
     </div>
   </div>
+  <button @click="onNewCabin">Add Cabin</button>
 </template>
 
 <script>
@@ -39,7 +40,11 @@ export default {
       this.cabins.push(Cabin.createSampleCabin(this.nextId()))
     },
     selectCabin(cabin){
-      this.selectedCabin = cabin;
+      if (this.selectedCabin === cabin){
+        this.selectedCabin = null;
+      } else {
+        this.selectedCabin = cabin;
+      }
       console.log(this.selectedCabin)
     }
 
@@ -68,6 +73,11 @@ img{
 
 .card{
   margin-right: 20px;
+  padding: 10px;
+}
+
+.selected{
+  background-color: gray;
 }
 
 </style>
