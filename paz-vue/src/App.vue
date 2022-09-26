@@ -4,6 +4,7 @@
 <template>
   <Header></Header>
   <NavBar></NavBar>
+  <CabinsOverview32></CabinsOverview32>
   <CabinsOverview31></CabinsOverview31>
 </template>
 
@@ -11,6 +12,7 @@
 import Header from "@/components/Header";
 import NavBar from "@/components/NavBar";
 import CabinsOverview31 from "@/components/cabins/Overview31";
+import CabinsOverview32 from "@/components/cabins/Overview32";
 
 
 export default {
@@ -18,7 +20,8 @@ export default {
   components: {
     Header,
     NavBar,
-    CabinsOverview31
+    CabinsOverview31,
+    CabinsOverview32
   }
 }
 </script>
