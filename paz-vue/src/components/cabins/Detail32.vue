@@ -45,6 +45,11 @@ export default {
       required: true
     }
   },
+  methods: {
+    deleteCabin(){
+      this.$emit("delete-cabin")
+    }
+  }
 }
 </script>
 

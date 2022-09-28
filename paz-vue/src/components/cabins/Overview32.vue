@@ -54,6 +54,9 @@ export default {
         this.selectedCabin = cabin
       }
       console.log(this.selectedCabin)
+    },
+    deleteCabin(cabinId){
+
     }
 
   }

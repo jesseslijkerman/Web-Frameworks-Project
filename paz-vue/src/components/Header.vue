@@ -13,7 +13,6 @@
     </div>
     <img class="image" id="zeester" src="../assets/zeester.png">
   </div>
-
 </template>
 
 
@@ -55,7 +54,7 @@ export default {
     padding: 10px;
     background-image: url("../assets/header.jpg");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
