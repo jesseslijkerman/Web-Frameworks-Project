@@ -41,7 +41,7 @@ export class Cabin {
         let locationSelector = Cabin.getRandomInt(6);
         let imageSelector = Cabin.getRandomInt(6);
         let descriptionSelector = Cabin.getRandomInt(6);
-        let numAvailable = Cabin.getRandomInt(20);
+        let numAvailable = Cabin.getRandomInt(50);
 
         switch (typeSelector) {
             case 0:

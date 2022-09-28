@@ -49,9 +49,9 @@ export default {
     },
     selectCabin(cabin){
       if (this.selectedCabin === cabin){
-        this.selectedCabin = null;
+        this.selectedCabin = null
       } else {
-        this.selectedCabin = cabin;
+        this.selectedCabin = cabin
       }
       console.log(this.selectedCabin)
     }

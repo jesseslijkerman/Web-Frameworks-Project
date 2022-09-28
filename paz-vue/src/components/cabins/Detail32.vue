@@ -1,28 +1,36 @@
 <template>
+  <h3>Cabin details (id={{selectedCabin.id}})</h3>
   <form>
     <label for="type">Type</label>
-    <select id="type" name="type">
-      <option value="beach-gear" :selected="{'selected' : selectedCabin.type === 'Beach Gear'}">Beach Gear</option>
-      <option value="small-day-time" :selected="{'selected' : selectedCabin.type === 'Small Day Time'}">Small Day Time</option>
-      <option value="small-lodge">Small Lodge</option>
-      <option value="large-lodge">Large Lodge</option>
-      <option value="Family-Lodge">Family Lodge</option>
+    <select id="type" name="type" v-model="selectedCabin.type">
+      <option value="Beach Gear">Beach Gear</option>
+      <option value="Small Day Time">Small Day Time</option>
+      <option value="Small Lodge">Small Lodge</option>
+      <option value="Large Lodge">Large Lodge</option>
+      <option value="Family Lodge">Family Lodge</option>
     </select>
 
     <label for="location">Location</label>
-    <input type="text" id="location" name="location" :value="selectedCabin.location">
+    <input type="text" id="location" name="location" v-model="selectedCabin.location">
 
     <label for="description">Description</label>
-    <input type="text" id="description" name="description" :value="selectedCabin.description">
+    <input type="text" id="description" name="description" v-model="selectedCabin.description">
 
     <label for="img">Image</label>
-    <input type="text" id="img" name="image" :value="selectedCabin.image">
+    <select id="img" name="image" v-model="selectedCabin.image">
+      <option value="/img/WFW_Random0.d811a977.jpg">Image 1</option>
+      <option value="/img/WFW_Random1.b4cfae01.jpg">Image 2</option>
+      <option value="/img/WFW_Random2.fddc4344.jpg">Image 3</option>
+      <option value="/img/WFW_Random3.631f4ca9.jpg">Image 4</option>
+      <option value="/img/WFW_Random4.f1f7f6db.jpg">Image 5</option>
+      <option value="/img/WFW_Random5.f52e03ea.jpg">Image 6</option>
+    </select>
 
     <label for="price">Price per week</label>
-    <input type="text" id="price" name="price-per-week" :value="selectedCabin.pricePerWeek">
+    <input type="text" id="price" name="price-per-week" v-model="selectedCabin.pricePerWeek">
 
     <label for="available">Total availability</label>
-    <input type="text" id="available" name="total-availability" :value="selectedCabin.numAvailable">
+    <input type="text" id="available" name="total-availability" v-model="selectedCabin.numAvailable">
   </form>
 </template>
 
