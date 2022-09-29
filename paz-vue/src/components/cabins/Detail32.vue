@@ -32,6 +32,7 @@
     <label for="available">Total availability</label>
     <input type="text" id="available" name="total-availability" v-model="selectedCabin.numAvailable">
   </form>
+  <button @click="deleteCabin">Delete cabin</button>
 </template>
 
 <script>
@@ -45,9 +46,10 @@ export default {
       required: true
     }
   },
+  emits: ["delete-cabin"],
   methods: {
     deleteCabin(){
-      this.$emit("delete-cabin")
+      this.$emit("delete-cabin", this.selectedCabin.id)
     }
   }
 }

@@ -10,7 +10,7 @@
   </div>
   <button @click="onNewCabin">Add Cabin</button>
   <p v-if="selectedCabin === null">Select a cabin for details</p>
-  <CabinDetail32 v-else v-bind:selected-cabin="selectedCabin"></CabinDetail32>
+  <CabinDetail32 v-else v-bind:selected-cabin="selectedCabin" @delete-cabin="deleteSelectedCabin"></CabinDetail32>
 </template>
 
 <script>
@@ -54,9 +54,16 @@ export default {
         this.selectedCabin = cabin
       }
       console.log(this.selectedCabin)
+      console.log(this.selectedCabin.index)
     },
-    deleteCabin(cabinId){
-
+    deleteSelectedCabin(cabinId){
+      console.log("iets")
+      for (let i = 0; i < this.cabins.length; i++) {
+        if (this.cabins[i].id === cabinId){
+          this.cabins.splice(i, 1)
+          this.selectedCabin = null;
+        }
+      }
     }
 
   }
