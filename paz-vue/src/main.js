@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 
-import App from './App.vue'
-// import Header from "@/components/Header";
-// import Welcome from "@/components/Welcome";
+import App from './App33.vue'
+import {router} from "@/router";
 
-createApp(App).mount('#app')
+createApp(App).use(router).mount('#app')

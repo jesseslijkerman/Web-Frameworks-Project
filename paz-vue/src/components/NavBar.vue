@@ -1,21 +1,21 @@
 <template>
   <div class="navbar">
-    <a class="left">Home</a>
+    <router-link to="/" class="left">Home</router-link>
     <div class="dropdown">
       <button class="dropbtn">Cabins
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a>All cabins overview</a>
-        <a>Cabins edit (components)</a>
-        <a>Cabins edit (routed)</a>
+        <router-link to="/overview31">All cabins overview</router-link>
+        <router-link to="/overview32">Cabins edit (components)</router-link>
+        <router-link to="/overview33">Cabins edit (routed)</router-link>
         <a>Cabins edit (managed)</a>
       </div>
     </div>
     <a class="left">Rentals</a>
     <a class="left">My Account</a>
-    <a class="right">Sign up</a>
-    <a class="right">Log in</a>
+    <router-link to="sign-up" class="right">Sign up</router-link>
+    <router-link to="sign-in" class="right">Log in</router-link>
   </div>
 </template>
 
@@ -67,7 +67,7 @@ body {
   margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover, .dropdown:hover .dropbtn, .navbar a.active {
   background-color: #55c4d7;
 }
 
@@ -89,7 +89,7 @@ body {
   text-align: left;
 }
 
-.dropdown-content a:hover {
+.dropdown-content a:hover,.dropdown-content a.active {
   background-color: #ddd;
 }
 
