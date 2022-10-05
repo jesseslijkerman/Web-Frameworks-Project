@@ -10,8 +10,7 @@ const routes = [
     {path: '/', component: Welcome},
     {path: '/overview31', component: Overview31},
     {path: '/overview32', component: Overview32},
-    {path: '/overview33', component: Overview33},
-    {path: '/overview33/:teamId', component: Detail32},
+    {path: '/overview33', component: Overview33, children: [{path: ':cabinId', component: Detail32}]},
     {path: '/:pathMatch(.*)', component: UnknownRoute}
 ];
 

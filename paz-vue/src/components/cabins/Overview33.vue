@@ -10,7 +10,7 @@
   </div>
   <button @click="onNewCabin">Add Cabin</button>
   <p v-if="selectedCabin === null">Select a cabin for details</p>
-  <CabinDetail32 v-else v-bind:selected-cabin="selectedCabin" @delete-cabin="deleteSelectedCabin"></CabinDetail32>
+  <router-view v-else v-bind:selected-cabin="selectedCabin" @delete-cabin="deleteSelectedCabin"></router-view>
 </template>
 
 <script>
@@ -20,7 +20,6 @@ import CabinDetail32 from "@/components/cabins/Detail32";
 export default {
   name: "CabinsOverview33",
   components: {
-    CabinDetail32
   },
   created() {
     this.lastId = 10000
@@ -48,13 +47,17 @@ export default {
       this.selectedCabin = newCabin
     },
     selectCabin(cabin){
+      if (cabin != null && cabin !== this.selectedCabin){
+        this.$router.push(this.$route.matched[0].path + "/" + cabin.id)
+      } else if (this.selectedCabin != null){
+        this.$router.push(this.$route.matched[0].path)
+      }
+
       if (this.selectedCabin === cabin){
         this.selectedCabin = null
       } else {
         this.selectedCabin = cabin
       }
-      console.log(this.selectedCabin)
-      console.log(this.selectedCabin.index)
     },
     deleteSelectedCabin(cabinId){
       console.log("iets")
@@ -64,9 +67,26 @@ export default {
           this.selectedCabin = null;
         }
       }
-    }
+    },
+    findSelectedFromRouteParam(route){
+      console.log(route.params.cabinId)
+      let cabinId = route.params.cabinId
+      let selectedCabin
 
-  }
+      for (let i = 0; i < this.cabins.length; i++) {
+        if (this.cabins[i].id === cabinId){
+          selectedCabin = this.cabins[i]
+        }
+      }
+      return selectedCabin;
+    }
+  },
+  watch:{
+    '$route'(){
+      // this.selectedCabin = this.findSelectedFromRouteParam(this.$route)
+    }
+  },
+
 }
 </script>
 
