@@ -9,7 +9,7 @@
     </div>
   </div>
   <button @click="onNewCabin">Add Cabin</button>
-  <p v-if="selectedCabin === null">Select a cabin for details</p>
+  <p v-if="selectedCabin == null">Select a cabin for details</p>
   <router-view v-else v-bind:selected-cabin="selectedCabin" @delete-cabin="deleteSelectedCabin"></router-view>
 </template>
 
@@ -47,16 +47,16 @@ export default {
       this.selectedCabin = newCabin
     },
     selectCabin(cabin){
-      if (cabin != null && cabin !== this.selectedCabin){
-        this.$router.push(this.$route.matched[0].path + "/" + cabin.id)
-      } else if (this.selectedCabin != null){
-        this.$router.push(this.$route.matched[0].path)
-      }
+      // if (cabin != null && cabin !== this.selectedCabin){
+      //   this.$router.push(this.$route.matched[0].path + "/" + cabin.id)
+      // } else if (this.selectedCabin != null){
+      //   this.$router.push(this.$route.matched[0].path)
+      // }
 
       if (this.selectedCabin === cabin){
-        this.selectedCabin = null
+        this.$router.push("/overview33");
       } else {
-        this.selectedCabin = cabin
+        this.$router.push("/overview33/"+cabin.id)
       }
     },
     deleteSelectedCabin(cabinId){
@@ -83,7 +83,10 @@ export default {
   },
   watch:{
     '$route'(){
-      // this.selectedCabin = this.findSelectedFromRouteParam(this.$route)
+      this.selectedCabin = this.cabins.find(x=>x.id==this.$route.params.cabinId)
+      console.log(this.selectedCabin)
+      console.log(this.$route.params.cabinId)
+      console.log(this.$route)
     }
   },
 
