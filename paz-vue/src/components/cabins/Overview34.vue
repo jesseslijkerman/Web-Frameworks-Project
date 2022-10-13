@@ -33,7 +33,7 @@ export default {
     return{
       lastId: 0,
       cabins: [],
-      selectedCabin: null
+      selectedCabin: null,
     }
   },
   methods: {
@@ -44,7 +44,8 @@ export default {
     onNewCabin(){
       let newCabin = Cabin.createSampleCabin(this.nextId())
       this.cabins.push(newCabin)
-      this.selectedCabin = newCabin
+      // this.selectedCabin = newCabin
+      this.$router.push("/overview34/"+newCabin.id)
     },
     selectCabin(cabin){
       // if (cabin != null && cabin !== this.selectedCabin){

@@ -192,8 +192,17 @@ export class Cabin {
                     price = 1500;
             }
         }
-
         return new Cabin(pId, type, location, description, image, price, numAvailable);
+    }
 
+    copyConstructor(cabin){
+        if (cabin == null) {
+            return null
+        }
+
+        // Copies properties from selected cabin to a new cabin
+        let copy = Object.assign(new Cabin(0), cabin)
+        copy.location = cabin.location
+        return copy;
     }
 }
