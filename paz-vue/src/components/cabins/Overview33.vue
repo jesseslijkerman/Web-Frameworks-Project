@@ -45,7 +45,8 @@ export default {
     onNewCabin(){
       let newCabin = Cabin.createSampleCabin(this.nextId())
       this.cabins.push(newCabin)
-      this.selectedCabin = newCabin
+      // this.selectedCabin = newCabin
+      this.$router.push("/overview33/"+newCabin.id)
     },
     selectCabin(cabin){
       // if (cabin != null && cabin !== this.selectedCabin){
