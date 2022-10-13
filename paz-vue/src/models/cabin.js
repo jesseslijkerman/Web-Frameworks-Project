@@ -202,7 +202,9 @@ export class Cabin {
 
         // Copies properties from selected cabin to a new cabin
         let copy = Object.assign(new Cabin(0), cabin)
-        copy.location = cabin.location
+        console.log(cabin.location)
+        console.log(copy.location)
+        // copy.location = cabin.location
         return copy;
     }
 }

@@ -85,9 +85,6 @@ export default {
   watch:{
     '$route'(){
       this.selectedCabin = this.cabins.find(x=>x.id==this.$route.params.cabinId)
-      console.log(this.selectedCabin)
-      console.log(this.$route.params.cabinId)
-      console.log(this.$route)
     }
   },
 

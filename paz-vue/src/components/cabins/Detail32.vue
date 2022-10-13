@@ -30,7 +30,7 @@
     <input type="text" id="price" name="price-per-week" v-model="selectedCabin.pricePerWeek">
 
     <label for="available">Total availability</label>
-    <input type="text" id="available" name="total-availability" v-model="selectedCabin.numAvailable">
+    <input type="number" id="available" name="total-availability" v-model="selectedCabin.numAvailable">
   </form>
   <button @click="deleteCabin">Delete cabin</button>
 </template>
@@ -61,7 +61,7 @@ form{
   width: 80%;
 }
 
-input[type=text], select {
+input[type=text], input[type=number], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

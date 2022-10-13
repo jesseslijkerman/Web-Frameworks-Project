@@ -1,6 +1,6 @@
 <template>
   <h3>Cabin details (id={{this.cabinCopy.id}})</h3>
-  <form>
+  <form @submit.prevent="saveCabin">
     <label for="type">Type</label>
     <select id="type" name="type" v-model="this.cabinCopy.type">
       <option value="Beach Gear">Beach Gear</option>
@@ -30,12 +30,12 @@
     <input type="text" id="price" name="price-per-week" v-model="this.cabinCopy.pricePerWeek">
 
     <label for="available">Total availability</label>
-    <input type="text" id="available" name="total-availability" v-model="this.cabinCopy.numAvailable">
+    <input type="number" id="available" name="total-availability" v-model="this.cabinCopy.numAvailable">
+    <button>Save cabin</button>
   </form>
   <button @click="deleteCabin">Delete cabin</button>
-  <button @click="saveCabin">Save cabin</button>
   <button @click="resetCabin">Reset cabin</button>
-  <button @click="clearCabin">Clear cabin</button>
+  <button @click="clearCabin">Clear input</button>
   <button @click="cancelCabin">Cancel cabin</button>
 
 </template>
@@ -55,10 +55,16 @@ export default {
   methods: {
     deleteCabin() {
       this.$emit("delete-cabin", this.selectedCabin.id)
-      // },
-      // saveCabin() {
-      //
-      // },
+    },
+    saveCabin(){
+      this.selectedCabin.type = this.cabinCopy.type
+      this.selectedCabin.location = this.cabinCopy.location
+      this.selectedCabin.description = this.cabinCopy.description
+      this.selectedCabin.image = this.cabinCopy.image
+      this.selectedCabin.pricePerWeek = this.cabinCopy.pricePerWeek
+      this.selectedCabin.numAvailable = this.cabinCopy.numAvailable
+    }
+
       // resetCabin() {
       //
       // },
@@ -68,7 +74,6 @@ export default {
       // cancelCabin() {
       //
       // }
-    }
   },
   data(){
     return{
@@ -88,7 +93,7 @@ form{
   width: 80%;
 }
 
-input[type=text], select {
+input[type=text], input[type=number], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
