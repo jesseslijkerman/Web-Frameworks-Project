@@ -18,7 +18,7 @@ import {Cabin} from "@/models/cabin";
 import CabinDetail32 from "@/components/cabins/Detail32";
 
 export default {
-  name: "CabinsOverview33",
+  name: "CabinsOverview34",
   components: {
   },
   created() {
@@ -41,7 +41,6 @@ export default {
       this.lastId = this.lastId + 3
       return this.lastId
     },
-
     onNewCabin(){
       let newCabin = Cabin.createSampleCabin(this.nextId())
       this.cabins.push(newCabin)
@@ -55,9 +54,9 @@ export default {
       // }
 
       if (this.selectedCabin === cabin){
-        this.$router.push("/overview33");
+        this.$router.push("/overview34");
       } else {
-        this.$router.push("/overview33/"+cabin.id)
+        this.$router.push("/overview34/"+cabin.id)
       }
     },
     deleteSelectedCabin(cabinId){
