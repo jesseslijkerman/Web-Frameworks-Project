@@ -31,12 +31,12 @@
 
     <label for="available">Total availability</label>
     <input type="number" id="available" name="total-availability" v-model="this.cabinCopy.numAvailable">
-    <button>Save cabin</button>
+    <button :disabled="hasChanged()">Save cabin</button>
   </form>
   <button @click="deleteCabin">Delete cabin</button>
-  <button @click="resetCabin">Reset data</button>
+  <button :disabled="hasChanged()" @click="resetCabin">Reset data</button>
   <button @click="clearCabin">Clear input</button>
-  <button @click="cancelCabin">Cancel</button>
+  <button :disabled="hasChanged()" @click="cancelCabin">Cancel</button>
 
 </template>
 
@@ -55,6 +55,7 @@ export default {
   methods: {
     deleteCabin() {
       this.$emit("delete-cabin", this.selectedCabin.id)
+      this.$router.push("/overview34")
     },
     saveCabin(){
       this.selectedCabin.type = this.cabinCopy.type
@@ -63,11 +64,14 @@ export default {
       this.selectedCabin.image = this.cabinCopy.image
       this.selectedCabin.pricePerWeek = this.cabinCopy.pricePerWeek
       this.selectedCabin.numAvailable = this.cabinCopy.numAvailable
+      this.$router.push("/overview34")
     },
     resetCabin(){
       console.log(this.originalData)
+      console.log(this.hasChanged())
       this.cabinCopy = Object.assign(new Cabin(0), this.originalData)
       console.log(this.cabinCopy)
+
     },
     clearCabin(){
       this.cabinCopy.type = ""
@@ -76,17 +80,13 @@ export default {
       this.cabinCopy.image = ""
       this.cabinCopy.pricePerWeek = ""
       this.cabinCopy.numAvailable = ""
+    },
+    cancelCabin(){
+      this.$router.push("/overview34")
+    },
+    hasChanged(){
+      return JSON.stringify(this.selectedCabin) === JSON.stringify(this.cabinCopy)
     }
-
-      // resetCabin() {
-      //
-      // },
-      // clearCabin() {
-      //
-      // },
-      // cancelCabin() {
-      //
-      // }
   },
   data(){
     return{
