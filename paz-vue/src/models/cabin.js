@@ -195,16 +195,12 @@ export class Cabin {
         return new Cabin(pId, type, location, description, image, price, numAvailable);
     }
 
-    copyConstructor(cabin){
+    static copyConstructor(cabin){
         if (cabin == null) {
             return null
         }
 
         // Copies properties from selected cabin to a new cabin
-        let copy = Object.assign(new Cabin(0), cabin)
-        console.log(cabin.location)
-        console.log(copy.location)
-        // copy.location = cabin.location
-        return copy;
+        return Object.assign(new Cabin(0), cabin);
     }
 }

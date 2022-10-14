@@ -34,9 +34,9 @@
     <button>Save cabin</button>
   </form>
   <button @click="deleteCabin">Delete cabin</button>
-  <button @click="resetCabin">Reset cabin</button>
+  <button @click="resetCabin">Reset data</button>
   <button @click="clearCabin">Clear input</button>
-  <button @click="cancelCabin">Cancel cabin</button>
+  <button @click="cancelCabin">Cancel</button>
 
 </template>
 
@@ -63,6 +63,19 @@ export default {
       this.selectedCabin.image = this.cabinCopy.image
       this.selectedCabin.pricePerWeek = this.cabinCopy.pricePerWeek
       this.selectedCabin.numAvailable = this.cabinCopy.numAvailable
+    },
+    resetCabin(){
+      console.log(this.originalData)
+      this.cabinCopy = Object.assign(new Cabin(0), this.originalData)
+      console.log(this.cabinCopy)
+    },
+    clearCabin(){
+      this.cabinCopy.type = ""
+      this.cabinCopy.location = ""
+      this.cabinCopy.description = ""
+      this.cabinCopy.image = ""
+      this.cabinCopy.pricePerWeek = ""
+      this.cabinCopy.numAvailable = ""
     }
 
       // resetCabin() {
@@ -77,11 +90,21 @@ export default {
   },
   data(){
     return{
-      cabinCopy: null
+      cabinCopy: null,
+      originalData: null
     }
   },
   created() {
-    this.cabinCopy = this.selectedCabin.copyConstructor(this.selectedCabin)
+    this.cabinCopy = Cabin.copyConstructor(this.selectedCabin)
+    this.originalData = this.selectedCabin
+    console.log(this.originalData)
+  },
+  watch:{
+    selectedCabin: function (newCabin){
+      this.cabinCopy = Cabin.copyConstructor(newCabin)
+      this.originalData = this.selectedCabin
+      console.log(this.originalData)
+    }
   }
 
 }

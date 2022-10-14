@@ -53,11 +53,8 @@ export default {
       } else {
         this.selectedCabin = cabin
       }
-      console.log(this.selectedCabin)
-      console.log(this.selectedCabin.index)
     },
     deleteSelectedCabin(cabinId){
-      console.log("iets")
       for (let i = 0; i < this.cabins.length; i++) {
         if (this.cabins[i].id === cabinId){
           this.cabins.splice(i, 1)
