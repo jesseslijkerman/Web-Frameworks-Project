@@ -9,6 +9,5 @@ import java.util.List;
 @Component
 public interface CabinsRepository {
 
-    @Autowired
     List<Cabin> findAll();
 }

@@ -1,6 +1,7 @@
 package app.repositories;
 
 import app.models.Cabin;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Array;
@@ -13,6 +14,7 @@ public class CabinsRepositoryMock implements CabinsRepository{
     private int uniqueId = 50000;
     private Cabin[] cabins;
 
+    @Autowired
     public CabinsRepositoryMock() {
         this.cabins = new Cabin[6];
         for (int i = 0; i < cabins.length; i++) {
