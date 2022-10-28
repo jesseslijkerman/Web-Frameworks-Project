@@ -1,12 +1,15 @@
 package app.repositories;
 
 import app.models.Cabin;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 public class CabinsRepositoryMock implements CabinsRepository{
+
     private int uniqueId = 50000;
     private Cabin[] cabins;
 
@@ -22,7 +25,7 @@ public class CabinsRepositoryMock implements CabinsRepository{
     }
 
     public int generateUniqueId(){
-        return this.uniqueId + 1;
+        return this.uniqueId = this.uniqueId + 1;
     }
 
     @Override
