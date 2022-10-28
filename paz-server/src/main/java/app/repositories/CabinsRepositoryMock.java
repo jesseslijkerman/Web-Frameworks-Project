@@ -3,6 +3,8 @@ package app.repositories;
 import app.models.Cabin;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 
 public class CabinsRepositoryMock implements CabinsRepository{
     private int uniqueId = 50000;
@@ -22,5 +24,11 @@ public class CabinsRepositoryMock implements CabinsRepository{
     public int generateUniqueId(){
         return this.uniqueId + 1;
     }
+
+    @Override
+    public List<Cabin> findAll() {
+        return Arrays.asList(this.cabins);
+    }
+
 
 }
