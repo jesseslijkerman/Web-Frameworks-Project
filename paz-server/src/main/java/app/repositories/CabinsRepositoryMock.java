@@ -4,7 +4,6 @@ import app.models.Cabin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,3 +35,4 @@ public class CabinsRepositoryMock implements CabinsRepository{
 
 
 }
+
