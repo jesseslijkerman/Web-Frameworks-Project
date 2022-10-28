@@ -13,7 +13,8 @@ import java.util.List;
 @RequestMapping("/cabins")
 public class CabinsController {
 
-    CabinsRepositoryMock cabinsRepo = new CabinsRepositoryMock();
+    @Autowired
+    private CabinsRepositoryMock cabinsRepo;
 
     @GetMapping(path = "test", produces = "application/json")
     public List<Cabin> getTestCabins(){

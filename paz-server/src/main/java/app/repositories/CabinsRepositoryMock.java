@@ -14,7 +14,6 @@ public class CabinsRepositoryMock implements CabinsRepository{
     private int uniqueId = 50000;
     private Cabin[] cabins;
 
-    @Autowired
     public CabinsRepositoryMock() {
         this.cabins = new Cabin[6];
         for (int i = 0; i < cabins.length; i++) {
