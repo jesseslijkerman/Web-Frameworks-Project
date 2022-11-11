@@ -1,4 +1,7 @@
 package app.models;
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 enum Type {
     BeachGear,
     SmallDayTime,
@@ -7,6 +10,7 @@ enum Type {
     FamilyLodge
 }
 
+// @JsonFilter("CabinFilter")
 public class Cabin {
     private int id;
     private Type type;
@@ -15,6 +19,10 @@ public class Cabin {
     private String image;
     private double pricePerWeek;
     private int numAvailable;
+
+    protected Cabin(){
+
+    };
 
     public Cabin(int id){
         int typeSelector = Cabin.getRandomInt(5);
@@ -132,6 +140,10 @@ public class Cabin {
 
     public int getNumAvailable() {
         return numAvailable;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

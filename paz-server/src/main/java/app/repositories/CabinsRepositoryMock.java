@@ -46,12 +46,14 @@ public class CabinsRepositoryMock implements CabinsRepository{
 
     @Override
     public Cabin save(Cabin cabin) {
+        Cabin selectedCabin = findbyId(cabin.getId());
         if (cabin.getId() == 0){
             cabin.setId(generateUniqueId());
             cabins.add(cabin);
+        } else if (selectedCabin == null){
+            cabins.add(cabin);
         } else {
-            Cabin oldCabin = findbyId(cabin.getId());
-            cabins.set(cabins.indexOf(oldCabin), cabin);
+            cabins.set(cabins.indexOf(selectedCabin), cabin);
         }
         return findbyId(cabin.getId());
     }
