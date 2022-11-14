@@ -48,12 +48,6 @@ export default {
       this.$router.push("/overview34/"+newCabin.id)
     },
     selectCabin(cabin){
-      // if (cabin != null && cabin !== this.selectedCabin){
-      //   this.$router.push(this.$route.matched[0].path + "/" + cabin.id)
-      // } else if (this.selectedCabin != null){
-      //   this.$router.push(this.$route.matched[0].path)
-      // }
-
       if (this.selectedCabin === cabin){
         this.$router.push("/overview34");
       } else {

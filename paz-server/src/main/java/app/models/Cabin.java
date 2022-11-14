@@ -1,6 +1,8 @@
 package app.models;
 
+import app.views.CustomViews;
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonView;
 
 enum Type {
     BeachGear,
@@ -12,12 +14,16 @@ enum Type {
 
 // @JsonFilter("CabinFilter")
 public class Cabin {
+    @JsonView(CustomViews.Summary.class)
     private int id;
+    @JsonView(CustomViews.Summary.class)
     private Type type;
     private String location;
+    @JsonView(CustomViews.Summary.class)
     private String description;
     private String image;
     private double pricePerWeek;
+    @JsonView(CustomViews.Summary.class)
     private int numAvailable;
 
     protected Cabin(){

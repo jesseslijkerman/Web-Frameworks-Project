@@ -1,8 +1,11 @@
 package app.rest;
 
-import app.exceptions.ResourceNotFoundException;
+import app.exceptions.PreConditionFailed;
+import app.exceptions.ResourceNotFound;
 import app.models.Cabin;
 import app.repositories.CabinsRepositoryMock;
+import app.views.CustomViews;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -37,7 +40,7 @@ public class CabinsController {
     public Cabin findById(@PathVariable int id){
         Cabin cabin = this.cabinsRepo.findbyId(id);
         if (cabin==null){
-            throw new ResourceNotFoundException("id-" + id);
+            throw new ResourceNotFound("id-" + id);
         }
         return cabin;
     }
@@ -47,31 +50,33 @@ public class CabinsController {
         cabinsRepo.save(cabin);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cabin.getId()).toUri();
 
-        // .body() method??
+        //
 
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(cabin);
+    }
+
+    @PutMapping(path = "/{id}")
+    public Cabin editCabin(@PathVariable int id, @RequestBody Cabin cabin){
+        if (cabin.getId() != id){
+            throw new PreConditionFailed("id-" + id + " doesn't match id of body");
+        }
+
+        cabinsRepo.save(cabin);
+        return cabin;
     }
 
     @DeleteMapping(path = "/{id}")
     public Cabin deleteCabin(@PathVariable int id){
         Cabin cabin = cabinsRepo.deleteById(id);
         if (cabin==null){
-            throw new ResourceNotFoundException("id-" + id);
+            throw new ResourceNotFound("id-" + id);
         }
         return cabin;
     }
 
+    @JsonView(CustomViews.Summary.class)
     @GetMapping(path = "summary", produces = "application/json")
-    public MappingJacksonValue getCabinSummary(){
-        List<Cabin> cabins = this.cabinsRepo.findAll();
-
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.
-                filterOutAllExcept("id", "type", "description", "numAvailable");
-
-        FilterProvider filters = new SimpleFilterProvider().addFilter("CabinFilter", filter);
-
-        MappingJacksonValue mapping = new MappingJacksonValue(cabins);
-        mapping.setFilters(filters);
-        return mapping;
+    public List<Cabin> getCabinSummary(){
+        return cabinsRepo.findAll();
     }
 }
