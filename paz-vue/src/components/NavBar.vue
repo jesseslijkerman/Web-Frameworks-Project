@@ -10,6 +10,7 @@
         <router-link to="/overview32">Cabins edit (components)</router-link>
         <router-link to="/overview33">Cabins edit (routed)</router-link>
         <router-link to="/overview34">Cabins edit (managed)</router-link>
+        <router-link to="/overview37">Cabins edit (3.7)</router-link>
       </div>
     </div>
     <a class="left">Rentals</a>
