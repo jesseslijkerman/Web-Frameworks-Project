@@ -1,4 +1,4 @@
-<template>
+4<template>
   <div class="container">
     <div class="scroll">
       <div :class="['card', { 'selected' : selectedCabin === cabin }]" v-for="cabin in cabins" v-bind:key="cabin.id" @click="selectCabin(cabin)">

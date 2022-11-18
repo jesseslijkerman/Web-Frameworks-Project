@@ -29,4 +29,12 @@ export class CabinsAdaptor{
         const cabin = await this.fetchJson(this.resourcesUrl + "/" + id);
         return cabin?.map(s => Cabin.copyConstructor(s))
     }
+
+    async asyncSave(cabin) {
+
+    }
+
+    async asyncDeleteById(id) {
+
+    }
 }
