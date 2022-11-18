@@ -31,10 +31,15 @@ export class CabinsAdaptor{
     }
 
     async asyncSave(cabin) {
+        console.log("CabinsAdaptor.asyncSave()...")
 
     }
 
     async asyncDeleteById(id) {
-
+        console.log("CabinsAdaptor.asyncDeleteById()...")
+        return this.fetchJson(this.resourcesUrl + "/" + id),
+            {
+            method: 'DELETE'
+        }
     }
 }
