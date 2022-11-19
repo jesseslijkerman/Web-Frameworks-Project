@@ -27,7 +27,7 @@ export class CabinsAdaptor{
     async asyncFindById(id){
         console.log("CabinsAdaptor.asyncFindById()...")
         const cabin = await this.fetchJson(this.resourcesUrl + "/" + id);
-        return cabin?.map(s => Cabin.copyConstructor(s))
+        return Cabin.copyConstructor(cabin);
     }
 
     async asyncSave(cabin) {
@@ -47,6 +47,6 @@ export class CabinsAdaptor{
         const cabin = this.fetchJson(this.resourcesUrl + "/" + id, {
             method: "DELETE"
         });
-        return cabin?.map(s => Cabin.copyConstructor(s))
+        return Cabin.copyConstructor(cabin);
     }
 }
