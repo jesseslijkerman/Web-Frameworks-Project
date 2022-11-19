@@ -55,16 +55,11 @@ export default {
   emits: ["delete-cabin"],
   methods: {
     deleteCabin() {
-      this.$emit("delete-cabin", this.selectedCabin.id)
+      this.cabinsService.asyncDeleteById(this.selectedCabin.id)
       this.$router.push("/overview37")
     },
     saveCabin(){
-      this.selectedCabin.type = this.cabinCopy.type
-      this.selectedCabin.location = this.cabinCopy.location
-      this.selectedCabin.description = this.cabinCopy.description
-      this.selectedCabin.image = this.cabinCopy.image
-      this.selectedCabin.pricePerWeek = this.cabinCopy.pricePerWeek
-      this.selectedCabin.numAvailable = this.cabinCopy.numAvailable
+      this.cabinsService.asyncSave(JSON.stringify(this.cabinCopy))
       this.$router.push("/overview37")
     },
     resetCabin(){

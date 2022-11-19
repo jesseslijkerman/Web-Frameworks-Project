@@ -3,11 +3,11 @@
   <form @submit.prevent="saveCabin">
     <label for="type">Type</label>
     <select id="type" name="type" v-model="this.cabinCopy.type">
-      <option value="Beach Gear">Beach Gear</option>
-      <option value="Small Day Time">Small Day Time</option>
-      <option value="Small Lodge">Small Lodge</option>
-      <option value="Large Lodge">Large Lodge</option>
-      <option value="Family Lodge">Family Lodge</option>
+      <option value="BeachGear">Beach Gear</option>
+      <option value="SmallDayTime">Small Day Time</option>
+      <option value="SmallLodge">Small Lodge</option>
+      <option value="LargeLodge">Large Lodge</option>
+      <option value="FamilyLodge">Family Lodge</option>
     </select>
 
     <label for="location">Location</label>
