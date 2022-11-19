@@ -57,12 +57,12 @@ public class Cabin {
         }
 
         switch (imageSelector) {
-            case 0 -> this.image = "../assets/cabins/WFW_Random0.jpg";
-            case 1 -> this.image = "../assets/cabins/WFW_Random1.jpg";
-            case 2 -> this.image = "../assets/cabins/WFW_Random2.jpg";
-            case 3 -> this.image = "../assets/cabins/WFW_Random3.jpg";
-            case 4 -> this.image = "../assets/cabins/WFW_Random4.jpg";
-            case 5 -> this.image = "../assets/cabins/WFW_Random5.jpg";
+            case 0 -> this.image = "/img/WFW_Random0.d811a977.jpg";
+            case 1 -> this.image = "/img/WFW_Random1.b4cfae01.jpg";
+            case 2 -> this.image = "/img/WFW_Random2.fddc4344.jpg";
+            case 3 -> this.image = "/img/WFW_Random3.631f4ca9.jpg";
+            case 4 -> this.image = "/img/WFW_Random4.f1f7f6db.jpg";
+            case 5 -> this.image = "/img/WFW_Random5.f52e03ea.jpg";
         }
 
         if (this.type == Type.BeachGear) {

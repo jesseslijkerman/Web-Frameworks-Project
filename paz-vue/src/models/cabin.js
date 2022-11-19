@@ -1,9 +1,9 @@
 const Type = {
-    BeachGear: "Beach Gear",
-    SmallDayTime: "Small Day Time",
-    SmallLodge: "Small Lodge",
-    LargeLodge: "Large Lodge",
-    FamilyLodge: "Family Lodge"
+    BeachGear: "BeachGear",
+    SmallDayTime: "SmallDayTime",
+    SmallLodge: "SmallLodge",
+    LargeLodge: "LargeLodge",
+    FamilyLodge: "FamilyLodge"
 }
 
 export class Cabin {
@@ -24,13 +24,6 @@ export class Cabin {
         this.pricePerWeek = pricePerWeek;
         this.numAvailable = numAvailable;
     }
-
-    // static copyConstructor(cabin) {
-    //     if (cabin == null) return null;
-    //     let copy = Object.assign(new Cabin(0), cabin);
-    //     copy.location = Location.copyConstructor(cabin.location);
-    //     return copy;
-    // }
 
     static getRandomInt(max){
         return Math.floor(Math.random() * max);

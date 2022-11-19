@@ -8,9 +8,16 @@
 <script>
 import Header from "@/components/Header";
 import NavBar from "@/components/NavBar";
+import {CabinsAdaptor} from "@/services/CabinsAdaptor";
+// import CONFIG from "../app-config.js" ??
 export default {
   name: "App37",
-  components: {NavBar, Header}
+  components: {NavBar, Header},
+  provide(){
+    return{
+      cabinsService: new CabinsAdaptor("http://localhost:8086/cabins")
+    }
+  }
 }
 </script>
 

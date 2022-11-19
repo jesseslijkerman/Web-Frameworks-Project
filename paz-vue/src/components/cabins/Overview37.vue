@@ -19,21 +19,16 @@ import CabinDetail32 from "@/components/cabins/Detail32";
 
 export default {
   name: "CabinsOverview37",
-  components: {
-  },
-  created() {
-    this.lastId = 10000
-    for (let i = 0; i < 8; i++) {
-      this.cabins.push(
-          Cabin.createSampleCabin(this.nextId())
-      )
-    }
+  inject: ["cabinsService"],
+  async created() {
+    this.cabins = await this.cabinsService.asyncFindAll();
+    this.selectedCabin = this.findSelectedFromRouteParam(this.$route);
   },
   data(){
     return{
       lastId: 0,
       cabins: [],
-      selectedCabin: null,
+      selectedCabin: null
     }
   },
   methods: {
@@ -41,11 +36,12 @@ export default {
       this.lastId = this.lastId + 3
       return this.lastId
     },
-    onNewCabin(){
-      let newCabin = Cabin.createSampleCabin(this.nextId())
+    async onNewCabin() {
+      let newCabin = await this.cabinsService.asyncSave(JSON.stringify(Cabin.createSampleCabin(0)));
+      console.log(newCabin)
       this.cabins.push(newCabin)
-      // this.selectedCabin = newCabin
-      this.$router.push("/overview37/"+newCabin.id)
+
+      this.$router.push("/overview37/" + newCabin.id)
     },
     selectCabin(cabin){
       if (this.selectedCabin === cabin){
@@ -80,8 +76,7 @@ export default {
     '$route'(){
       this.selectedCabin = this.cabins.find(x=>x.id==this.$route.params.cabinId)
     }
-  },
-
+  }
 }
 </script>
 
