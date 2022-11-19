@@ -32,14 +32,21 @@ export class CabinsAdaptor{
 
     async asyncSave(cabin) {
         console.log("CabinsAdaptor.asyncSave()...")
-
+        const selectedCabin = await this.fetchJson(this.resourcesUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: cabin
+        })
+        return Cabin.copyConstructor(selectedCabin);
     }
 
     async asyncDeleteById(id) {
-        console.log("CabinsAdaptor.asyncDeleteById()...")
-        return this.fetchJson(this.resourcesUrl + "/" + id),
-            {
-            method: 'DELETE'
-        }
+        console.log("CabinsAdaptor.asyncDeleteById()...");
+        const cabin = this.fetchJson(this.resourcesUrl + "/" + id, {
+            method: "DELETE"
+        });
+        return cabin?.map(s => Cabin.copyConstructor(s))
     }
 }
