@@ -46,12 +46,6 @@ import {Cabin} from "@/models/cabin";
 export default {
   name: "CabinDetail37",
   inject: ["cabinsService"],
-  props: {
-    selectedCabin: {
-      type: Cabin,
-      required: true
-    }
-  },
   emits: ["delete-cabin"],
   methods: {
     deleteCabin() {
@@ -82,24 +76,27 @@ export default {
     },
     hasChanged(){
       return JSON.stringify(this.selectedCabin) === JSON.stringify(this.cabinCopy)
+    },
+    async reInitialise(){
+      this.selectedCabin =
+          await this.cabinsService.asyncFindById(this.$route?.params?.cabinId)
+      console.log(this.$route.params?.cabinId)
+      this.cabinCopy = Cabin.copyConstructor(this.selectedCabin)
     }
   },
   data(){
     return{
       cabinCopy: null,
-      originalData: null
+      originalData: null,
+      selectedCabin: null
     }
   },
   created() {
-    this.cabinCopy = Cabin.copyConstructor(this.selectedCabin)
-    this.originalData = this.selectedCabin
-    console.log(this.originalData)
+    this.reInitialise();
   },
   watch:{
-    selectedCabin: function (newCabin){
-      this.cabinCopy = Cabin.copyConstructor(newCabin)
-      this.originalData = this.selectedCabin
-      console.log(this.originalData)
+    '$route'(){
+      this.reInitialise();
     }
   }
 
