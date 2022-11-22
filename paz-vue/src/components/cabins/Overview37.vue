@@ -9,8 +9,9 @@
     </div>
   </div>
   <button @click="onNewCabin">Add Cabin</button>
+  <button @click="onReload">test</button>
   <p v-if="selectedCabin == null">Select a cabin for details</p>
-  <router-view v-else v-bind:selected-cabin="selectedCabin" @delete-cabin="deleteSelectedCabin"></router-view>
+  <router-view v-else v-bind:selected-cabin="selectedCabin" @delete-cabin="deleteSelectedCabin" @refresh="onReload"></router-view>
 </template>
 
 <script>
@@ -70,6 +71,10 @@ export default {
         }
       }
       return selectedCabin;
+    },
+    async onReload(){
+      this.cabins = await this.cabinsService.asyncFindAll();
+      this.selectedCabin = this.findSelectedFromRouteParam(this.$route?.params?.cabinId)
     }
   },
   watch:{

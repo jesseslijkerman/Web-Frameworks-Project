@@ -46,15 +46,17 @@ import {Cabin} from "@/models/cabin";
 export default {
   name: "CabinDetail37",
   inject: ["cabinsService"],
-  emits: ["delete-cabin"],
+  emits: ["delete-cabin", "refresh"],
   methods: {
-    deleteCabin() {
-      this.cabinsService.asyncDeleteById(this.selectedCabin.id)
+    async deleteCabin() {
+      await this.cabinsService.asyncDeleteById(this.selectedCabin.id)
       this.$router.push("/overview37")
+      this.$emit("refresh")
     },
-    saveCabin(){
-      this.cabinsService.asyncSave(JSON.stringify(this.cabinCopy))
+    async saveCabin(){
+      await this.cabinsService.asyncSave(JSON.stringify(this.cabinCopy))
       this.$router.push("/overview37")
+      this.$emit("refresh")
     },
     resetCabin(){
       console.log(this.originalData)
