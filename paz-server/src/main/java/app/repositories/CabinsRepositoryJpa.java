@@ -32,7 +32,9 @@ public class CabinsRepositoryJpa implements CabinsRepository{
 
     @Override
     public Cabin deleteById(int id) {
-        return null;
+        Cabin cabin = findbyId(id);
+        entityManager.remove(cabin);
+        return cabin;
     }
 }
 
