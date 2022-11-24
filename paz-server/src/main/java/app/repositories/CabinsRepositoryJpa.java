@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -17,12 +18,13 @@ public class CabinsRepositoryJpa implements CabinsRepository{
 
     @Override
     public List<Cabin> findAll() {
-        return null;
+        TypedQuery<Cabin> namedQuery = entityManager.createNamedQuery("find_all_cabins", Cabin.class);
+        return namedQuery.getResultList();
     }
 
     @Override
     public Cabin findbyId(int id) {
-        return null;
+        return entityManager.find(Cabin.class, id);
     }
 
     @Override

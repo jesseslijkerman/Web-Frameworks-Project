@@ -1,17 +1,13 @@
 package app.models;
 
 import app.views.CustomViews;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 enum Type {
     BeachGear,
@@ -22,6 +18,7 @@ enum Type {
 }
 
 @Entity
+@NamedQuery(name="find_all_cabins", query="select c from Cabin c")
 public class Cabin {
     @Id
     @GeneratedValue
@@ -39,7 +36,7 @@ public class Cabin {
 
     protected Cabin(){
 
-    };
+    }
 
     public Cabin(Type type, String location, String description, String image, double pricePerWeek, int numAvailable) {
         this.type = type;

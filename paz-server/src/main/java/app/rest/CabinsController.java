@@ -3,11 +3,13 @@ package app.rest;
 import app.exceptions.PreConditionFailed;
 import app.exceptions.ResourceNotFound;
 import app.models.Cabin;
+import app.repositories.CabinsRepository;
 import app.repositories.CabinsRepositoryJpa;
 import app.repositories.CabinsRepositoryMock;
 import app.views.CustomViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,8 +21,9 @@ import java.util.List;
 @RequestMapping("/cabins")
 public class CabinsController {
 
+    @Qualifier("cabinsRepositoryJpa")
     @Autowired
-    private CabinsRepositoryJpa cabinsRepo;
+    private CabinsRepository cabinsRepo;
 
     @GetMapping(path = "test", produces = "application/json")
     public List<Cabin> getTestCabins(){
