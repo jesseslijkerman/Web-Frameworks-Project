@@ -4,6 +4,10 @@ import app.views.CustomViews;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 enum Type {
     BeachGear,
     SmallDayTime,
@@ -12,8 +16,10 @@ enum Type {
     FamilyLodge
 }
 
-// @JsonFilter("CabinFilter")
+@Entity
 public class Cabin {
+    @Id
+    @GeneratedValue
     @JsonView(CustomViews.Summary.class)
     private int id;
     @JsonView(CustomViews.Summary.class)
@@ -29,6 +35,15 @@ public class Cabin {
     protected Cabin(){
 
     };
+
+    public Cabin(Type type, String location, String description, String image, double pricePerWeek, int numAvailable) {
+        this.type = type;
+        this.location = location;
+        this.description = description;
+        this.image = image;
+        this.pricePerWeek = pricePerWeek;
+        this.numAvailable = numAvailable;
+    }
 
     public Cabin(int id){
         int typeSelector = Cabin.getRandomInt(5);
