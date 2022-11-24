@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import java.util.ArrayList;
+import java.util.List;
+
 enum Type {
     BeachGear,
     SmallDayTime,
@@ -33,6 +36,8 @@ public class Cabin {
     private double pricePerWeek;
     @JsonView(CustomViews.Summary.class)
     private int numAvailable;
+    @OneToMany
+    private List<Rental> rentals = new ArrayList<>();
 
     protected Cabin(){
 
@@ -133,7 +138,27 @@ public class Cabin {
         }
     }
 
-    private static int getRandomInt(int max){
+    private boolean associateReview(Rental rental){
+        for (Rental value : rentals) {
+            if (value == rental) {
+                return false;
+            }
+        }
+        this.rentals.add(rental);
+        return true;
+    }
+
+    public boolean disassociateReview(Rental rental){
+        for (Rental value : rentals) {
+            if (value == rental) {
+                this.rentals.remove(rental);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int getRandomInt(int max){
         return (int) Math.floor(Math.random() * max);
     }
 
@@ -163,6 +188,10 @@ public class Cabin {
 
     public int getNumAvailable() {
         return numAvailable;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
     }
 
     public void setId(int id) {
