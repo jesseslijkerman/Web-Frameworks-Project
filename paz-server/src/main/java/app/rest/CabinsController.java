@@ -3,6 +3,7 @@ package app.rest;
 import app.exceptions.PreConditionFailed;
 import app.exceptions.ResourceNotFound;
 import app.models.Cabin;
+import app.repositories.CabinsRepositoryJpa;
 import app.repositories.CabinsRepositoryMock;
 import app.views.CustomViews;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -19,7 +20,7 @@ import java.util.List;
 public class CabinsController {
 
     @Autowired
-    private CabinsRepositoryMock cabinsRepo;
+    private CabinsRepositoryJpa cabinsRepo;
 
     @GetMapping(path = "test", produces = "application/json")
     public List<Cabin> getTestCabins(){
