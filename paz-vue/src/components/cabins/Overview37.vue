@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div class="scroll">
-      <div :class="['card', { 'selected' : selectedCabin === cabin }]" v-for="cabin in cabins" v-bind:key="cabin.id" @click="selectCabin(cabin)">
+      <div :class="['card', { 'selected' : selectedCabin === cabin }]"
+           v-for="cabin in cabins"
+           v-bind:key="cabin.id"
+           @click="onSelect(cabin)">
         <img :src="cabin.image">
         <p>{{ cabin.type }}</p>
         <p>{{ cabin.location }}</p>
@@ -9,9 +12,8 @@
     </div>
   </div>
   <button @click="onNewCabin">Add Cabin</button>
-  <button @click="onReload">test</button>
   <p v-if="selectedCabin == null">Select a cabin for details</p>
-  <router-view v-else v-bind:selected-cabin="selectedCabin" @delete-cabin="deleteSelectedCabin" @refresh="onReload"></router-view>
+  <router-view v-else v-bind:selected-cabin="selectedCabin" @refresh="onReload"></router-view>
 </template>
 
 <script>
@@ -22,8 +24,7 @@ export default {
   name: "CabinsOverview37",
   inject: ["cabinsService"],
   async created() {
-    this.cabins = await this.cabinsService.asyncFindAll();
-    this.selectedCabin = this.findSelectedFromRouteParam(this.$route);
+    await this.onReload();
   },
   data(){
     return{
@@ -33,16 +34,22 @@ export default {
     }
   },
   methods: {
-    nextId(){
-      this.lastId = this.lastId + 3
-      return this.lastId
+    onSelect(cabin) {
+      // find the parent path by dropping any trailing /NNN from the route path
+      let parentPath = this.$route?.fullPath.replace(new RegExp("/\\d*$"),'');
+      if (cabin != null && cabin !== this.selectedCabin) {
+        // navigate to new child route
+        this.$router.push(parentPath + "/" + cabin.id);
+      } else {
+        // navigate to parent route
+        this.$router.push(parentPath);
+      }
     },
     async onNewCabin() {
       let newCabin = await this.cabinsService.asyncSave(JSON.stringify(Cabin.createSampleCabin(0)));
       console.log(newCabin)
       this.cabins.push(newCabin)
       this.$router.push("/overview37/" + newCabin.id)
-
     },
     selectCabin(cabin){
       if (this.selectedCabin === cabin){
