@@ -1,6 +1,8 @@
 package app;
 
 import app.models.Cabin;
+import app.models.Rental;
+import app.models.Status;
 import app.repositories.CabinsRepository;
 import app.repositories.CabinsRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
@@ -30,6 +33,11 @@ public class PazServerApplication implements CommandLineRunner {
 	@Qualifier("cabinsRepositoryJpa")
 	@Autowired
 	private CabinsRepository cabinsRepo;
+	Rental rental1 = new Rental(
+			LocalDate.of(2022, 11, 25),
+			LocalDate.of(2022, 11, 30),
+			Status.APPROVED
+	);
 
 	protected void createInitialCabins(){
 		List<Cabin> cabins = this.cabinsRepo.findAll();

@@ -30,6 +30,13 @@ public class Rental {
     public Rental() {
     }
 
+    public Rental(LocalDate startDate, LocalDate endDate, Status status, double cost) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.cost = cost;
+    }
+
     public boolean associateCabin(Cabin cabin){
         if (cabin == null){
             this.cabin = null;

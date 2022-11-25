@@ -13,7 +13,7 @@
   </div>
   <button @click="onNewCabin">Add Cabin</button>
   <p v-if="selectedCabin == null">Select a cabin for details</p>
-  <router-view v-else v-bind:selected-cabin="selectedCabin" @refresh="onReload"></router-view>
+  <router-view v-else @refresh="onReload"></router-view>
 </template>
 
 <script>

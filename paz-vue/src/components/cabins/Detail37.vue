@@ -46,7 +46,7 @@ import {Cabin} from "@/models/cabin";
 export default {
   name: "CabinDetail37",
   inject: ["cabinsService"],
-  emits: ["delete-cabin", "refresh"],
+  emits: ["refresh"],
   methods: {
     async deleteCabin() {
       await this.cabinsService.asyncDeleteById(this.selectedCabin.id)
