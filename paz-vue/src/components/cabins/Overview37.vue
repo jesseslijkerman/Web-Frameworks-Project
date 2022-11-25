@@ -40,6 +40,7 @@ export default {
       if (cabin != null && cabin !== this.selectedCabin) {
         // navigate to new child route
         this.$router.push(parentPath + "/" + cabin.id);
+        this.selectedCabin = cabin;
       } else {
         // navigate to parent route
         this.$router.push(parentPath);
