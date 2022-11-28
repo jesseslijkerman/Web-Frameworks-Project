@@ -2,9 +2,9 @@ package app;
 
 import app.models.Cabin;
 import app.models.Rental;
-import app.models.Status;
 import app.repositories.CabinsRepository;
 import app.repositories.CabinsRepositoryJpa;
+import app.repositories.RentalsRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -33,10 +33,22 @@ public class PazServerApplication implements CommandLineRunner {
 	@Qualifier("cabinsRepositoryJpa")
 	@Autowired
 	private CabinsRepository cabinsRepo;
+
+	@Autowired
+	private RentalsRepositoryJpa rentalsRepo;
+
+
 	Rental rental1 = new Rental(
 			LocalDate.of(2022, 11, 25),
-			LocalDate.of(2022, 11, 30),
-			Status.APPROVED
+			LocalDate.of(2022, 11, 30)
+	);
+	Rental rental2 = new Rental(
+			LocalDate.of(2022, 12, 2),
+			LocalDate.of(2022, 12, 8)
+	);
+	Rental rental3 = new Rental(
+			LocalDate.of(2022, 12, 15),
+			LocalDate.of(2022, 12, 29)
 	);
 
 	protected void createInitialCabins(){
@@ -46,8 +58,17 @@ public class PazServerApplication implements CommandLineRunner {
 
 		for (int i = 0; i < 6; i++) {
 			Cabin cabin = new Cabin(0);
+
+			for (int j = 0; j < 3; j++) {
+				Rental rental = new Rental(
+						LocalDate.of(2022, 11, 25),
+						LocalDate.of(2022, 11, 30));
+				Rental savedRental = this.rentalsRepo.save(rental);
+			}
+			
 			Cabin savedCabin = this.cabinsRepo.save(cabin);
 		}
+		
 	}
 
 }

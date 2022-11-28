@@ -30,12 +30,34 @@ public class Rental {
     public Rental() {
     }
 
+    public Rental(LocalDate startDate, LocalDate endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+
+        int statusSelector = getRandomInt(6);
+        switch (statusSelector){
+            case 0 -> this.status = Status.REQUESTED;
+            case 1 -> this.status = Status.APPROVED;
+            case 2 -> this.status = Status.DECLINED;
+            case 3 -> this.status = Status.PAID;
+            case 4 -> this.status = Status.FULFILLED;
+            case 5 -> this.status = Status.CANCELLED;
+            case 6 -> this.status = Status.BLOCKED;
+        }
+    }
+
+    public static int getRandomInt(int max){
+        return (int) Math.floor(Math.random() * max);
+    }
+
     public Rental(LocalDate startDate, LocalDate endDate, Status status, double cost) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
         this.cost = cost;
     }
+
+
 
     public boolean associateCabin(Cabin cabin){
         if (cabin == null){

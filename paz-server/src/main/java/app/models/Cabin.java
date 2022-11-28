@@ -138,7 +138,7 @@ public class Cabin {
         }
     }
 
-    private boolean associateReview(Rental rental){
+    public boolean associateRental(Rental rental){
         for (Rental value : rentals) {
             if (value == rental) {
                 return false;
@@ -148,7 +148,7 @@ public class Cabin {
         return true;
     }
 
-    public boolean disassociateReview(Rental rental){
+    public boolean disassociateRental(Rental rental){
         for (Rental value : rentals) {
             if (value == rental) {
                 this.rentals.remove(rental);
