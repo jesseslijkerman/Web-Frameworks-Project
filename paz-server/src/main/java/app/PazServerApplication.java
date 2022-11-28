@@ -63,6 +63,8 @@ public class PazServerApplication implements CommandLineRunner {
 				Rental rental = new Rental(
 						LocalDate.of(2022, 11, 25),
 						LocalDate.of(2022, 11, 30));
+				rental.associateCabin(cabin);
+				cabin.associateRental(rental);
 				Rental savedRental = this.rentalsRepo.save(rental);
 			}
 			
