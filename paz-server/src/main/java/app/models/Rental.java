@@ -30,7 +30,8 @@ public class Rental {
     public Rental() {
     }
 
-    public Rental(LocalDate startDate, LocalDate endDate) {
+    public Rental(int id ,LocalDate startDate, LocalDate endDate) {
+        this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
 
@@ -44,6 +45,8 @@ public class Rental {
             case 5 -> this.status = Status.CANCELLED;
             case 6 -> this.status = Status.BLOCKED;
         }
+
+        this.cost = getRandomInt(1000);
     }
 
     public static int getRandomInt(int max){

@@ -37,20 +37,6 @@ public class PazServerApplication implements CommandLineRunner {
 	@Autowired
 	private RentalsRepositoryJpa rentalsRepo;
 
-
-	Rental rental1 = new Rental(
-			LocalDate.of(2022, 11, 25),
-			LocalDate.of(2022, 11, 30)
-	);
-	Rental rental2 = new Rental(
-			LocalDate.of(2022, 12, 2),
-			LocalDate.of(2022, 12, 8)
-	);
-	Rental rental3 = new Rental(
-			LocalDate.of(2022, 12, 15),
-			LocalDate.of(2022, 12, 29)
-	);
-
 	protected void createInitialCabins(){
 		List<Cabin> cabins = this.cabinsRepo.findAll();
 		if (cabins.size() > 0) return;
@@ -61,6 +47,7 @@ public class PazServerApplication implements CommandLineRunner {
 
 			for (int j = 0; j < 3; j++) {
 				Rental rental = new Rental(
+						0,
 						LocalDate.of(2022, 11, 25),
 						LocalDate.of(2022, 11, 30));
 				rental.associateCabin(cabin);
