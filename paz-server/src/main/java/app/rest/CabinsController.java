@@ -3,7 +3,9 @@ package app.rest;
 import app.exceptions.PreConditionFailed;
 import app.exceptions.ResourceNotFound;
 import app.models.Cabin;
+import app.models.Rental;
 import app.repositories.CabinsRepository;
+import app.repositories.RentalsRepositoryJpa;
 import app.views.CustomViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,9 @@ public class CabinsController {
     @Qualifier("cabinsRepositoryJpa")
     @Autowired
     private CabinsRepository cabinsRepo;
+
+    @Autowired
+    private RentalsRepositoryJpa rentalsRepo;
 
     @GetMapping(path = "test", produces = "application/json")
     public List<Cabin> getTestCabins(){
@@ -75,4 +81,29 @@ public class CabinsController {
     public List<Cabin> getCabinSummary(){
         return cabinsRepo.findAll();
     }
+
+    @PostMapping(path = "{id}/rentals")
+    public Rental addRental(@PathVariable int id, @RequestBody Rental rental){
+        Cabin cabin = cabinsRepo.findbyId(id);
+        LocalDate startDate = rental.getStartDate();
+        LocalDate endDate = rental.getEndDate();
+
+        if (cabin == null){
+            throw new PreConditionFailed("Cabin ID does not match valid cabin");
+        } else if (!dateIsValid(startDate,endDate)){
+            throw new PreConditionFailed("Check out date (" + startDate + ") cannot be before check in date(" + endDate + ")");
+        }
+
+        rental.associateCabin(cabin);
+        cabin.associateRental(rental);
+        return this.rentalsRepo.save(rental);
+    }
+
+    private boolean dateIsValid(LocalDate startDate, LocalDate endDate){
+        return startDate.isBefore(endDate);
+    }
+
+//    private boolean durationIsInWholeWeeks(LocalDate startDate, LocalDate endDate){
+//
+//    }
 }
