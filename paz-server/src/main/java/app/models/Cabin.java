@@ -36,7 +36,7 @@ public class Cabin {
     private double pricePerWeek;
     @JsonView(CustomViews.Summary.class)
     private int numAvailable;
-    @OneToMany
+    @OneToMany(mappedBy = "cabin")
     private List<Rental> rentals = new ArrayList<>();
 
     protected Cabin(){

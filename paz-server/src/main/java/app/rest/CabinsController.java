@@ -4,8 +4,6 @@ import app.exceptions.PreConditionFailed;
 import app.exceptions.ResourceNotFound;
 import app.models.Cabin;
 import app.repositories.CabinsRepository;
-import app.repositories.CabinsRepositoryJpa;
-import app.repositories.CabinsRepositoryMock;
 import app.views.CustomViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
