@@ -1,6 +1,7 @@
 package app.models;
 
 import app.views.CustomViews;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ enum Type {
 @NamedQuery(name="find_all_cabins", query="select c from Cabin c")
 public class Cabin {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(CustomViews.Summary.class)
     private int id;
     @JsonView(CustomViews.Summary.class)
@@ -37,6 +38,7 @@ public class Cabin {
     @JsonView(CustomViews.Summary.class)
     private int numAvailable;
     @OneToMany(mappedBy = "cabin")
+    @JsonManagedReference
     private List<Rental> rentals = new ArrayList<>();
 
     protected Cabin(){

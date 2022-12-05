@@ -1,5 +1,7 @@
 package app.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -16,13 +18,15 @@ enum Status {
 @NamedQuery(name="find_all_rentals", query = "select r from Rental r")
 public class Rental {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private LocalDate startDate;
     private LocalDate endDate;
+    @Enumerated(EnumType.STRING)
     private Status status;
     private double cost;
     @ManyToOne
+    @JsonBackReference
     private Cabin cabin;
 
     public Rental() {
