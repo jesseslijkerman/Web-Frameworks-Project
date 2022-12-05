@@ -37,6 +37,7 @@ public class PazServerApplication implements CommandLineRunner {
 	@Autowired
 	private RentalsRepositoryJpa rentalsRepo;
 
+
 	protected void createInitialCabins(){
 		List<Cabin> cabins = this.cabinsRepo.findAll();
 		if (cabins.size() > 0) return;
