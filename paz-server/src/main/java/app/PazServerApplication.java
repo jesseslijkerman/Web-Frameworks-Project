@@ -47,15 +47,18 @@ public class PazServerApplication implements CommandLineRunner {
 			Cabin cabin = new Cabin(0);
 			Cabin savedCabin = this.cabinsRepo.save(cabin);
 
+			// Adds 3 rentals for every cabin we create
 			for (int j = 0; j < 3; j++) {
 				Rental rental = new Rental(
 						0,
 						LocalDate.of(2022, 11, 25),
 						LocalDate.of(2022, 11, 30));
-				Rental savedRental = this.rentalsRepo.save(rental);
 				rental.associateCabin(savedCabin);
+				cabin.associateRental(rental);
+				Rental savedRental = this.rentalsRepo.save(rental);
 			}
 		}
 	}
+
 
 }

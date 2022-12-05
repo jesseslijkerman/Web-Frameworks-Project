@@ -139,11 +139,11 @@ public class Cabin {
     }
 
     public boolean associateRental(Rental rental){
-        for (Rental value : rentals) {
-            if (value == rental) {
-                return false;
-            }
-        }
+//        for (Rental value : rentals) {
+//            if (value == rental) {
+//                return false;
+//            }
+//        }
         this.rentals.add(rental);
         return true;
     }

@@ -1,9 +1,6 @@
 package app.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 enum Status {
@@ -19,6 +16,7 @@ enum Status {
 @NamedQuery(name="find_all_rentals", query = "select r from Rental r")
 public class Rental {
     @Id
+    @GeneratedValue
     private long id;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -63,10 +61,10 @@ public class Rental {
 
 
     public boolean associateCabin(Cabin cabin){
-        if (cabin == null){
-            this.cabin = null;
-            return false;
-        }
+//        if (cabin == null){
+//            this.cabin = null;
+//            return false;
+//        }
         this.cabin = cabin;
         return true;
     }
