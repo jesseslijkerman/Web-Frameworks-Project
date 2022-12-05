@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @RestController
@@ -88,10 +89,22 @@ public class CabinsController {
         LocalDate startDate = rental.getStartDate();
         LocalDate endDate = rental.getEndDate();
 
+        if (startDate == null){
+            startDate = LocalDate.now().plusDays(1);
+            rental.setStartDate(startDate);
+        }
+
+        if (endDate == null){
+            endDate = startDate.plusDays(7);
+            rental.setEndDate(endDate);
+        }
+
         if (cabin == null){
             throw new PreConditionFailed("Cabin ID does not match valid cabin");
         } else if (!dateIsValid(startDate,endDate)){
-            throw new PreConditionFailed("Check out date (" + startDate + ") cannot be before check in date(" + endDate + ")");
+            throw new PreConditionFailed("Check out date (" + startDate + ") cannot be before check in date (" + endDate + ")");
+        } else if (!durationIsInWholeWeeks(startDate, endDate)){
+            throw new PreConditionFailed("Period " + startDate + "to " + endDate + " is not a valid rental period.");
         }
 
         rental.associateCabin(cabin);
@@ -103,7 +116,8 @@ public class CabinsController {
         return startDate.isBefore(endDate);
     }
 
-//    private boolean durationIsInWholeWeeks(LocalDate startDate, LocalDate endDate){
-//
-//    }
+    private boolean durationIsInWholeWeeks(LocalDate startDate, LocalDate endDate){
+        Period period = Period.between(startDate, endDate);
+        return period.getDays() % 7 == 0;
+    }
 }
