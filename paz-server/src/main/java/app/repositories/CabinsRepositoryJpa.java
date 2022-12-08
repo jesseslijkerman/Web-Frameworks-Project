@@ -38,6 +38,11 @@ public class CabinsRepositoryJpa implements CabinsRepository{
         entityManager.remove(cabin);
         return cabin;
     }
+
+    @Override
+    public List<Cabin> findByQuery(String jpqlName, Object... params) {
+        return null;
+    }
 }
 
 

@@ -22,12 +22,15 @@ enum Type {
 }
 
 @Entity
-@NamedQuery(name="find_all_cabins", query="select c from Cabin c")
+@NamedQuery(name="find_all_cabins", query="SELECT c FROM Cabin c")
+@NamedQuery(name="Cabin_find_by_type", query = "SELECT c FROM Cabin c WHERE c.type = :type")
+@NamedQuery(name="Cabin_find_by_location", query="SELECT c FROM Cabin c WHERE c.location = :location")
 public class Cabin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(CustomViews.Summary.class)
     private int id;
+    @Enumerated(EnumType.STRING)
     @JsonView(CustomViews.Summary.class)
     private Type type;
     private String location;

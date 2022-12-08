@@ -16,6 +16,7 @@ enum Status {
 }
 @Entity
 @NamedQuery(name="find_all_rentals", query = "select r from Rental r")
+@NamedQuery(name="Rental_find_by_cabinId_and_period", query = "SELECT r FROM Rental r WHERE r.cabin.id = :id AND r.startDate BETWEEN :startDate AND :endDate")
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

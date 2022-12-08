@@ -65,6 +65,11 @@ public class CabinsRepositoryMock implements CabinsRepository{
         return cabin;
     }
 
+    @Override
+    public List findByQuery(String jpqlName, Object... params) {
+        return null;
+    }
+
 
 }
 
