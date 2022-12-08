@@ -41,7 +41,14 @@ public class CabinsRepositoryJpa implements CabinsRepository{
 
     @Override
     public List<Cabin> findByQuery(String jpqlName, Object... params) {
-        return null;
+        TypedQuery<Cabin> namedQuery = entityManager.createNamedQuery(jpqlName, Cabin.class);
+
+
+        for (int i = 0; i < params.length; i++) {
+            namedQuery.setParameter(i+1, params[i]);
+        }
+
+        return namedQuery.getResultList();
     }
 }
 

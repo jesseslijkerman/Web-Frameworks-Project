@@ -25,7 +25,7 @@ public class CabinsController {
 
     @Qualifier("cabinsRepositoryJpa")
     @Autowired
-    private CabinsRepository cabinsRepo;
+    private CabinsRepository<Cabin> cabinsRepo;
 
     @Autowired
     private RentalsRepositoryJpa rentalsRepo;
@@ -37,8 +37,19 @@ public class CabinsController {
     }
 
     @GetMapping(path = "", produces = "application/json")
-    public List<Cabin> getAllCabins() {
-        return this.cabinsRepo.findAll();
+    public List<Cabin> getAllCabins(@RequestParam(required = false) String type,
+                                    @RequestParam(required = false) String location) {
+
+
+        if (type == null && location == null){
+            // Regular request without parameters
+            return this.cabinsRepo.findAll();
+        } else if (type != null){
+            return cabinsRepo.findByQuery("Cabin_find_by_type", type);
+        } else {
+            return cabinsRepo.findByQuery("Cabin_find_by_location", location);
+        }
+
     }
 
     @GetMapping(path = "/{id}", produces = "application/json")
