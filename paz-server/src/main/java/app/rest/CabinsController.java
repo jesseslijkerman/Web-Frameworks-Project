@@ -1,5 +1,6 @@
 package app.rest;
 
+import app.exceptions.BadRequest;
 import app.exceptions.PreConditionFailed;
 import app.exceptions.ResourceNotFound;
 import app.models.Cabin;
@@ -40,14 +41,19 @@ public class CabinsController {
     public List<Cabin> getAllCabins(@RequestParam(required = false) String type,
                                     @RequestParam(required = false) String location) {
 
+        int paramsCount = (type != null ? 1 : 0) + (location != null ? 1 : 0);
 
-        if (type == null && location == null){
+        if (paramsCount == 0){
             // Regular request without parameters
             return this.cabinsRepo.findAll();
-        } else if (type != null){
-            return cabinsRepo.findByQuery("Cabin_find_by_type", type);
+        } else if (paramsCount == 1){
+            if (type != null){
+                return cabinsRepo.findByQuery("Cabin_find_by_type", type);
+            } else {
+                return cabinsRepo.findByQuery("Cabin_find_by_location", location);
+            }
         } else {
-            return cabinsRepo.findByQuery("Cabin_find_by_location", location);
+            throw new BadRequest("Illegal combination of type=, location= query parameters");
         }
 
     }

@@ -3,7 +3,6 @@ package app;
 import app.models.Cabin;
 import app.models.Rental;
 import app.repositories.CabinsRepository;
-import app.repositories.CabinsRepositoryJpa;
 import app.repositories.RentalsRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
