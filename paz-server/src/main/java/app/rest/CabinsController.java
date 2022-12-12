@@ -11,6 +11,7 @@ import app.views.CustomViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -103,6 +104,21 @@ public class CabinsController {
     @GetMapping(path = "summary", produces = "application/json")
     public List<Cabin> getCabinSummary(){
         return cabinsRepo.findAll();
+    }
+
+    @GetMapping(path="{id}/rentals")
+    public List<Rental> getRentals(@PathVariable int id,
+                                   @RequestParam(required = false)@DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate from,
+                                   @RequestParam(required = false)@DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate to){
+
+        int paramsCount = (from != null ? 1 : 0) + (to != null ? 1 : 0);
+        if (paramsCount == 0){
+            return rentalsRepo.findByQuery("find_rentals_by_cabinId", id);
+        } else if (paramsCount == 2){
+            return rentalsRepo.findByQuery("Rental_find_by_cabinId_and_period", id, from, to);
+        } else {
+            throw new BadRequest("Illegal combination of to=, from= query parameters");
+        }
     }
 
     @PostMapping(path = "{id}/rentals")

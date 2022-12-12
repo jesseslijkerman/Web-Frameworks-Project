@@ -1,5 +1,6 @@
 package app.repositories;
 
+import app.models.Cabin;
 import app.models.Rental;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,7 @@ public class RentalsRepositoryJpa {
         return namedQuery.getResultList();
     }
 
-    public Rental findbyId(int id) {
+    public Rental findById(int id) {
         return entityManager.find(Rental.class, id);
     }
 
@@ -29,8 +30,19 @@ public class RentalsRepositoryJpa {
     }
 
     public Rental deleteById(int id) {
-        Rental rental = findbyId(id);
+        Rental rental = findById(id);
         entityManager.remove(rental);
         return rental;
+    }
+
+    public List<Rental> findByQuery(String jpqlName, Object... params) {
+        TypedQuery<Rental> namedQuery = entityManager.createNamedQuery(jpqlName, Rental.class);
+
+
+        for (int i = 0; i < params.length; i++) {
+            namedQuery.setParameter(i+1, params[i]);
+        }
+
+        return namedQuery.getResultList();
     }
 }

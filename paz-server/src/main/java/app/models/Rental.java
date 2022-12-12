@@ -8,7 +8,8 @@ import java.time.LocalDate;
 
 @Entity
 @NamedQuery(name="find_all_rentals", query = "select r from Rental r")
-@NamedQuery(name="Rental_find_by_cabinId_and_period", query = "SELECT r FROM Rental r WHERE r.cabin.id = :id AND r.startDate BETWEEN ?1 AND ?2")
+@NamedQuery(name="find_rentals_by_cabinId", query = "select r from Rental r WHERE r.cabin.id = ?1")
+@NamedQuery(name="Rental_find_by_cabinId_and_period", query = "SELECT r FROM Rental r WHERE r.cabin.id = ?1 AND r.startDate BETWEEN ?2 AND ?3")
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
