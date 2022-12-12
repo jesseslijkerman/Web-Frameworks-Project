@@ -13,17 +13,9 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
-enum Type {
-    BeachGear,
-    SmallDayTime,
-    SmallLodge,
-    LargeLodge,
-    FamilyLodge
-}
-
 @NamedQueries({
         @NamedQuery(name="find_all_cabins", query="SELECT c FROM Cabin c"),
-        @NamedQuery(name="Cabin_find_by_type", query = "SELECT c FROM Cabin c WHERE c.type = ?1"),
+        @NamedQuery(name="Cabin_find_by_type", query = "SELECT c FROM Cabin c WHERE c.cabinType = ?1"),
         @NamedQuery(name="Cabin_find_by_location", query="SELECT c FROM Cabin c WHERE c.location = ?1")
 })
 @Entity
@@ -34,7 +26,7 @@ public class Cabin {
     private int id;
     @Enumerated(EnumType.STRING)
     @JsonView(CustomViews.Summary.class)
-    private Type type;
+    private CabinType cabinType;
     private String location;
     @JsonView(CustomViews.Summary.class)
     private String description;
@@ -46,12 +38,20 @@ public class Cabin {
     @JsonManagedReference
     private List<Rental> rentals = new ArrayList<>();
 
+    public enum CabinType {
+        BeachGear,
+        SmallDayTime,
+        SmallLodge,
+        LargeLodge,
+        FamilyLodge
+    }
+
     protected Cabin(){
 
     }
 
-    public Cabin(Type type, String location, String description, String image, double pricePerWeek, int numAvailable) {
-        this.type = type;
+    public Cabin(CabinType cabinType, String location, String description, String image, double pricePerWeek, int numAvailable) {
+        this.cabinType = cabinType;
         this.location = location;
         this.description = description;
         this.image = image;
@@ -69,11 +69,11 @@ public class Cabin {
         this.numAvailable = Cabin.getRandomInt(50);
 
         switch (typeSelector) {
-            case 0 -> this.type = Type.BeachGear;
-            case 1 -> this.type = Type.SmallDayTime;
-            case 2 -> this.type = Type.SmallLodge;
-            case 3 -> this.type = Type.LargeLodge;
-            case 4 -> this.type = Type.FamilyLodge;
+            case 0 -> this.cabinType = CabinType.BeachGear;
+            case 1 -> this.cabinType = CabinType.SmallDayTime;
+            case 2 -> this.cabinType = CabinType.SmallLodge;
+            case 3 -> this.cabinType = CabinType.LargeLodge;
+            case 4 -> this.cabinType = CabinType.FamilyLodge;
         }
 
         switch (locationSelector) {
@@ -94,48 +94,48 @@ public class Cabin {
             case 5 -> this.image = "/img/WFW_Random5.f52e03ea.jpg";
         }
 
-        if (this.type == Type.BeachGear) {
+        if (this.cabinType == CabinType.BeachGear) {
             description = "";
         } else {
             description = switch (descriptionSelector) {
-                case 0 -> "Colorful " + type + " with a great view.";
-                case 1 -> "This " + type + " in " + location + " is a great place to relax.";
-                case 2 -> "Spacy " + type + " on the beach of " + location + ".";
-                case 3 -> "Comfortable " + type + ", comes with a fridge.";
-                case 4 -> type + " in " + location + " where dreams come true.";
-                case 5 -> "Modern " + type + " where you can enjoy the " + location + " beach.";
+                case 0 -> "Colorful " + cabinType + " with a great view.";
+                case 1 -> "This " + cabinType + " in " + location + " is a great place to relax.";
+                case 2 -> "Spacy " + cabinType + " on the beach of " + location + ".";
+                case 3 -> "Comfortable " + cabinType + ", comes with a fridge.";
+                case 4 -> cabinType + " in " + location + " where dreams come true.";
+                case 5 -> "Modern " + cabinType + " where you can enjoy the " + location + " beach.";
                 default -> description;
             };
         }
 
-        if (type == Type.BeachGear) {
+        if (cabinType == CabinType.BeachGear) {
             switch (Cabin.getRandomInt(3)) {
                 case 0 -> pricePerWeek = 100;
                 case 1 -> pricePerWeek = 120;
                 case 2 -> pricePerWeek = 150;
             }
-        } else if (type == Type.SmallDayTime) {
+        } else if (cabinType == CabinType.SmallDayTime) {
             pricePerWeek = switch (Cabin.getRandomInt(3)) {
                 case 0 -> 300;
                 case 1 -> 370;
                 case 2 -> 410;
                 default -> pricePerWeek;
             };
-        } else if (type == Type.SmallLodge) {
+        } else if (cabinType == CabinType.SmallLodge) {
             pricePerWeek = switch (Cabin.getRandomInt(3)) {
                 case 0 -> 400;
                 case 1 -> 450;
                 case 2 -> 500;
                 default -> pricePerWeek;
             };
-        } else if (type == Type.LargeLodge) {
+        } else if (cabinType == CabinType.LargeLodge) {
             pricePerWeek = switch (Cabin.getRandomInt(3)) {
                 case 0 -> 750;
                 case 1 -> 1025;
                 case 2 -> 850;
                 default -> pricePerWeek;
             };
-        } else if (type == Type.FamilyLodge) {
+        } else if (cabinType == CabinType.FamilyLodge) {
             pricePerWeek = switch (Cabin.getRandomInt(3)) {
                 case 0 -> 1000;
                 case 1 -> 1125;
@@ -165,6 +165,15 @@ public class Cabin {
         return false;
     }
 
+    public static boolean typeContains(String type){
+        for (CabinType t : CabinType.values()){
+            if (t.name().equals(type)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static int getRandomInt(int max){
         return (int) Math.floor(Math.random() * max);
     }
@@ -173,8 +182,8 @@ public class Cabin {
         return id;
     }
 
-    public Type getType() {
-        return type;
+    public CabinType getCabinType() {
+        return cabinType;
     }
 
     public String getLocation() {
@@ -209,7 +218,7 @@ public class Cabin {
     public String toString() {
         return "Cabin{" +
                 "id=" + id +
-                ", type=" + type +
+                ", cabinType=" + cabinType +
                 ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", image='" + image + '\'' +

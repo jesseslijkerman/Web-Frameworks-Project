@@ -48,7 +48,12 @@ public class CabinsController {
             return this.cabinsRepo.findAll();
         } else if (paramsCount == 1){
             if (type != null){
-                return cabinsRepo.findByQuery("Cabin_find_by_type", type);
+                if (!Cabin.typeContains(type)){
+                    throw new PreConditionFailed("Type=" + type + " is not a valid cabin type value");
+                } else {
+                    Cabin.CabinType cabinType = Cabin.CabinType.valueOf(type);
+                    return cabinsRepo.findByQuery("Cabin_find_by_type", cabinType);
+                }
             } else {
                 return cabinsRepo.findByQuery("Cabin_find_by_location", location);
             }

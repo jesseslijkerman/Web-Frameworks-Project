@@ -5,15 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-enum Status {
-    REQUESTED,
-    APPROVED,
-    DECLINED,
-    PAID,
-    FULFILLED,
-    CANCELLED,
-    BLOCKED
-}
+
 @Entity
 @NamedQuery(name="find_all_rentals", query = "select r from Rental r")
 @NamedQuery(name="Rental_find_by_cabinId_and_period", query = "SELECT r FROM Rental r WHERE r.cabin.id = :id AND r.startDate BETWEEN ?1 AND ?2")
@@ -29,6 +21,16 @@ public class Rental {
     @ManyToOne
     @JsonBackReference
     private Cabin cabin;
+
+    enum Status {
+        REQUESTED,
+        APPROVED,
+        DECLINED,
+        PAID,
+        FULFILLED,
+        CANCELLED,
+        BLOCKED
+    }
 
     public Rental() {
     }
