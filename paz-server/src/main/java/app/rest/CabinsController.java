@@ -26,6 +26,7 @@ import java.util.List;
 public class CabinsController {
 
     @Qualifier("cabinsRepositoryJpa")
+    //@Qualifier("cabinsRepositoryMock")
     @Autowired
     private CabinsRepository<Cabin> cabinsRepo;
 

@@ -30,6 +30,7 @@ public class PazServerApplication implements CommandLineRunner {
 	}
 
 	@Qualifier("cabinsRepositoryJpa")
+	//@Qualifier("cabinsRepositoryMock")
 	@Autowired
 	private CabinsRepository cabinsRepo;
 
