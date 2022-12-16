@@ -6,8 +6,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Set;
+
 @Configuration
 public class APIConfig implements WebMvcConfigurer {
+    public Set<String> SECURED_PATHS =
+            Set.of("/authentication", "/h2-console", "/favicon.ico");
+
+
     @Value("${jwt.issuer:private company}")
     private String issuer;
 

@@ -2,7 +2,7 @@ package app.rest;
 
 import app.APIConfig;
 import app.exceptions.NotAcceptable;
-import app.models.JWToken;
+import app.security.JWToken;
 import app.models.User;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,6 @@ public class AuthenticationController {
     public ResponseEntity<User> logIn(@RequestBody ObjectNode signInInfo){
         String email = signInInfo.get("email").asText();
         String password = signInInfo.get("password").asText();
-
-
 
         String[] emailSplit = email.split("@");
 
