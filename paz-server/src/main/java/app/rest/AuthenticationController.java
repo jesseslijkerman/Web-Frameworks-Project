@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/authentication")
@@ -28,7 +29,7 @@ public class AuthenticationController {
         String[] emailSplit = email.split("@");
 
         if (Objects.equals(password, emailSplit[0])){
-            User user = new User((int) (Math.random() * 100), emailSplit[0], email, "registered user", password);
+            User user = new User(1L + (long) (Math.random() * 100L) , emailSplit[0], email, "registered user", password);
             JWToken jwToken = new JWToken(user.getName(), user.getId(), user.getRole());
 
             String tokenString = jwToken.encode(

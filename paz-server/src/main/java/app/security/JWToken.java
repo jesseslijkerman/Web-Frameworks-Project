@@ -1,7 +1,6 @@
 package app.security;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -11,7 +10,7 @@ import java.util.Date;
 
 public class JWToken {
     private String callName;
-    private int userId;
+    private Long userId;
     private String role;
 
     private static final String JWT_CALLNAME_CLAIM = "sub";
@@ -21,7 +20,7 @@ public class JWToken {
     public JWToken() {
     }
 
-    public JWToken(String callName, int userId, String role) {
+    public JWToken(String callName, Long userId, String role) {
         this.callName = callName;
         this.userId = userId;
         this.role = role;
@@ -40,6 +39,18 @@ public class JWToken {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
+
+//    public static JWToken decode(String token, String passphrase)
+//        throws ExpiredJwtException, MalformedJwtException {
+//        // Validate the token
+//        Key key = getKey(passphrase);
+//        Jws<Claims> jws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+//        Claims claims = jws.getBody();
+//
+//        JWToken jwToken = new JWToken(claims.get(JWT_CALLNAME_CLAIM).toString(), Long.valueOf(claims.get(JWT_USERID_CLAIM).toString()),
+//                claims.get(JWT_ROLE_CLAIM).toString());
+//
+//    }
 
     private static Key getKey(String passphrase){
         byte[] hmacKey = passphrase.getBytes(StandardCharsets.UTF_8);

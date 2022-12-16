@@ -7,7 +7,7 @@ public class User {
     @SequenceGenerator(name="Account_ids", initialValue=100001)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Account_ids")
     @Id
-    private int id;
+    private Long id;
     private String name;
     private String email;
     private String role;
@@ -16,7 +16,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String email, String role, String hashedPassword) {
+    public User(Long id, String name, String email, String role, String hashedPassword) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -24,11 +24,11 @@ public class User {
         this.hashedPassword = hashedPassword;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
