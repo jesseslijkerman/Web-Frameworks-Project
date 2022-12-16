@@ -21,6 +21,8 @@ public class JWToken {
 
     private static final String JWT_IPADDRESS_CLAIM = "ipa";
 
+    public static final String JWT_ATTRIBUTE_NAME = "authorization";
+
     public JWToken() {
     }
 

@@ -41,6 +41,21 @@ public class JWTRequestFilter extends OncePerRequestFilter {
             return;
         }
 
+        JWToken jwToken = null;
+        try {
+            jwToken = JWToken.decode(encryptedToken.replace("Bearer ", " "), this.apiConfig.getPassphrase());
+        } catch (RuntimeException e) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage() + " You need to login first.");
+            return;
+        }
+
+        // pass-on the token info as an attribute for the request
+        request.setAttribute(JWToken.JWT_ATTRIBUTE_NAME, jwToken);
+
+        chain.doFilter(request, response);
+
+
+
 
 
 
