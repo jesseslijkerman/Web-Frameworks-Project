@@ -15,7 +15,29 @@ export class SessionSbService {
 
     }
 
-    asyncSignIn() {
+    async asyncSignIn(email, password) /* :Promise<User> */ {
+        const body = JSON.stringify({email: email, password: password});
+        let response = await fetch(this.RESOURCES_URL + "/login", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: body,
+            credentials: 'include',
+            })
+
+            if (response.ok) {
+                let user = await response.json();
+                this.saveTokenIntoBrowserStorage(
+                    response.headers.get('Authorization'),
+                    user
+                );
+                return user;
+            } else {
+                console.log(response)
+                return null;
+            }
+
+
+
 
     }
 
