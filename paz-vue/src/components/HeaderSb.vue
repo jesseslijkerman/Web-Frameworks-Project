@@ -11,8 +11,12 @@
       <h1>{{siteName}}</h1>
       <h2>Come enjoy the waves!</h2>
     </div>
-    <p>Welcome {{this.currentAccount.name}}</p>
-    <img class="image" id="zeester" src="../assets/zeester.png">
+    <div class="right-side">
+      <div class="welcome">
+        <p>Welcome {{this.currentAccount.name}}</p>
+      </div>
+      <img class="image" id="zeester" src="../assets/zeester.png">
+    </div>
   </div>
 </template>
 
@@ -58,8 +62,9 @@ export default {
       await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
     },
     getAccountFromLocalStorage(){
-      this.currentAccount = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
-      console.log(this.currentAccount)
+      let data = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
+
+      this.currentAccount = JSON.parse(data)
     }
   }
 }
@@ -85,12 +90,21 @@ export default {
   justify-self: left;
 }
 
+.right-side{
+  display: flex;
+  justify-self: right;
+}
+
+.welcome{
+  align-self: end;
+}
+
 .date{
   align-self: end;
   text-align: left;
 }
 
-.date p{
+.date p, .welcome p{
   font-size: large;
 }
 
