@@ -26,6 +26,8 @@
 
 
 <script>
+import {Cabin} from "@/models/cabin";
+
 export default {
   name: "HeaderSb",
   inject: ['sessionService'],
@@ -35,7 +37,9 @@ export default {
       image: "../assets/header.jpg",
       currentDate: ""
     };
-
+  },
+  created() {
+    this.test()
   },
   methods: {
     getCurrentDate(){
@@ -47,8 +51,8 @@ export default {
       console.log(currentDate)
       return currentDate;
     },
-    test(){
-      this.sessionService.asyncSignIn()
+    async test(){
+      await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
     }
   }
 }
