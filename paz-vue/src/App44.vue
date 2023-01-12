@@ -16,7 +16,7 @@ import HeaderSb from "@/components/HeaderSb";
 
 export default {
   name: "App44",
-  components: {NavBar, HeaderSb},
+  components: {HeaderSb, NavBar},
   provide() {
     //create a singleton reactive service tracking the authorisation data of the session
     this.theSessionSbService = shallowReactive(
