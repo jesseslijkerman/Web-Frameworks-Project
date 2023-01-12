@@ -1,5 +1,5 @@
 <template>
-  <Header></Header>
+  <HeaderSb></HeaderSb>
   <NavBar></NavBar>
   <router-view></router-view>
 </template>
@@ -12,10 +12,11 @@ import CONFIG from '../app-config.js'
 import NavBar from "@/components/NavBar";
 import Header from "@/components/Header";
 import {CabinsAdaptor} from "@/services/CabinsAdaptor";
+import HeaderSb from "@/components/HeaderSb";
 
 export default {
   name: "App44",
-  components: {NavBar, Header},
+  components: {NavBar, HeaderSb},
   provide() {
     //create a singleton reactive service tracking the authorisation data of the session
     this.theSessionSbService = shallowReactive(
