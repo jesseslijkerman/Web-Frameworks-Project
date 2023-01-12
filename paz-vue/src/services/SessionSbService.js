@@ -37,10 +37,6 @@ export class SessionSbService {
                 console.log(response)
                 return null;
             }
-
-
-
-
     }
 
     saveTokenIntoBrowserStorage(token, account) {
@@ -50,14 +46,28 @@ export class SessionSbService {
         if (token == null) {
             this.currentAccount == null;
             window.sessionStorage.removeItem(this.BROWSER_STORAGE_ITEM_NAME);
-            window.sessionStorage.removeItem(this.BROWSER_STORAGE_ITEM_NAME+"ACC");
+            window.sessionStorage.removeItem(this.BROWSER_STORAGE_ITEM_NAME+"_ACC");
         } else {
             window.sessionStorage.setItem(this.BROWSER_STORAGE_ITEM_NAME, token);
-            window.sessionStorage.setItem(this.BROWSER_STORAGE_ITEM_NAME+"ACC", JSON.stringify(account));
+            window.sessionStorage.setItem(this.BROWSER_STORAGE_ITEM_NAME+"_ACC", JSON.stringify(account));
         }
     }
 
     getTokenFromBrowserStorage() {
+        if (this.currentToken != null) return this.currentToken
+        this.currentToken = window.sessionStorage.getItem(this.BROWSER_STORAGE_ITEM_NAME);
+        let jsonAccount = window.sessionStorage.getItem(this.BROWSER_STORAGE_ITEM_NAME+"_ACC");
 
+        if (this.currentToken == null) {
+            this.currentToken = localStorage.getItem(this.BROWSER_STORAGE_ITEM_NAME)
+            this.currentAccount = localStorage.getItem(this.BROWSER_STORAGE_ITEM_NAME+"_ACC")
+            // TODO try to find the token+account in local storage and replicate to this session if found
+        }
+        if (jsonAccount != null) {
+            this.currentAccount = JSON.parse(jsonAccount);
+        }
+        console.log("SessionService recovered token: ", this.currentToken);
+        console.log("Current Account:", this.currentAccount);
+        return this.currentToken;
     }
 }

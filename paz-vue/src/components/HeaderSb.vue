@@ -11,6 +11,7 @@
       <h1>{{siteName}}</h1>
       <h2>Come enjoy the waves!</h2>
     </div>
+    <p>Welcome {{this.currentAccount.name}}</p>
     <img class="image" id="zeester" src="../assets/zeester.png">
   </div>
 </template>
@@ -35,11 +36,13 @@ export default {
     return {
       siteName: "Play & Stay aan Zee",
       image: "../assets/header.jpg",
-      currentDate: ""
+      currentDate: "",
+      currentAccount: null
     };
   },
   created() {
-    this.test()
+    //this.signIn()
+    this.getAccountFromLocalStorage()
   },
   methods: {
     getCurrentDate(){
@@ -51,8 +54,12 @@ export default {
       console.log(currentDate)
       return currentDate;
     },
-    async test(){
+    async signIn(){
       await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
+    },
+    getAccountFromLocalStorage(){
+      this.currentAccount = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
+      console.log(this.currentAccount)
     }
   }
 }

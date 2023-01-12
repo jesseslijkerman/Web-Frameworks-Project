@@ -22,8 +22,6 @@ export default {
     this.theSessionSbService = shallowReactive(
         new SessionSbService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM)
     );
-
-
     return{
       // stateless data services adaptor singletons
       cabinsService: new CabinsAdaptor(CONFIG.BACKEND_URL+ "/cabins"),
@@ -35,6 +33,30 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
+body{
+  margin: 0;
+}
+
+h1{
+  margin: 0;
+}
+
+button{
+  background-color: goldenrod;
+  border: none;
+  padding: 5px;
+}
+
+button:hover{
+  background-color: darkgoldenrod;
+}
 </style>
