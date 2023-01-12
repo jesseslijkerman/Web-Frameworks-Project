@@ -10,6 +10,7 @@
     <button>Sign On</button>
   </form>
   <p class="errormessage">{{errorMessage}}</p>
+  <p></p>
 </template>
 
 <script>
