@@ -1,6 +1,6 @@
 <template>
   <HeaderSb></HeaderSb>
-  <NavBar></NavBar>
+  <NavBarSb></NavBarSb>
   <router-view></router-view>
 </template>
 
@@ -10,13 +10,14 @@ import {reactive, shallowReactive} from "vue";
 import CONFIG from '../app-config.js'
 
 import NavBar from "@/components/NavBar";
+import NavBarSb from "@/components/NavBarSb";
 import Header from "@/components/Header";
 import {CabinsAdaptor} from "@/services/CabinsAdaptor";
 import HeaderSb from "@/components/HeaderSb";
 
 export default {
   name: "App44",
-  components: {HeaderSb, NavBar},
+  components: {HeaderSb, NavBarSb},
   provide() {
     //create a singleton reactive service tracking the authorisation data of the session
     this.theSessionSbService = shallowReactive(
