@@ -13,7 +13,8 @@
     </div>
     <div class="right-side">
       <div class="welcome">
-        <p>Welcome {{this.currentAccount.name}}</p>
+        <p>Welcome {{this.username}}</p>
+        <button @click="signOut">log out</button>
       </div>
       <img class="image" id="zeester" src="../assets/zeester.png">
     </div>
@@ -41,11 +42,11 @@ export default {
       siteName: "Play & Stay aan Zee",
       image: "../assets/header.jpg",
       currentDate: "",
-      currentAccount: null
+      currentAccount: null,
+      username: ""
     };
   },
   created() {
-    //this.signIn()
     this.getAccountFromLocalStorage()
   },
   methods: {
@@ -61,10 +62,18 @@ export default {
     async signIn(){
       await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
     },
+    async signOut(){
+      await this.sessionService.signOut()
+    },
     getAccountFromLocalStorage(){
       let data = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
+      if (data == null){
+        this.username = "visitor"
+        return
+      }
 
       this.currentAccount = JSON.parse(data)
+      this.username = this.currentAccount.name
     }
   }
 }

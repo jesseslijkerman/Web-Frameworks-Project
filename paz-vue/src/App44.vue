@@ -9,9 +9,7 @@ import {SessionSbService} from "@/services/SessionSbService";
 import {reactive, shallowReactive} from "vue";
 import CONFIG from '../app-config.js'
 
-import NavBar from "@/components/NavBar";
 import NavBarSb from "@/components/NavBarSb";
-import Header from "@/components/Header";
 import {CabinsAdaptor} from "@/services/CabinsAdaptor";
 import HeaderSb from "@/components/HeaderSb";
 
