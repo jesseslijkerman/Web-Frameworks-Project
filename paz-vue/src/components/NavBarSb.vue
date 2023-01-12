@@ -16,7 +16,7 @@
     <a class="left">Rentals</a>
     <a class="left">My Account</a>
     <router-link to="/sign-up" class="right">Sign up</router-link>
-    <router-link @click="login" to="/sign-in" class="right">Log in</router-link>
+    <router-link to="/sign-in" class="right">Log in</router-link>
   </div>
 </template>
 
