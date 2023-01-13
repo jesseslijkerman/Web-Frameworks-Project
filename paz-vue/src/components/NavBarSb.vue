@@ -15,6 +15,7 @@
     </div>
     <a class="left">Rentals</a>
     <a class="left">My Account</a>
+    <p>{{isLoggedIn}}</p>
     <router-link to="/sign-up" class="right">Sign up</router-link>
     <router-link to="/sign-in" class="right">Log in</router-link>
   </div>
@@ -26,7 +27,7 @@ export default {
   inject: ['sessionService'],
   data() {
     return {
-      isLoggedIn: this.sessionService.isAuthenticated()
+      //isLoggedIn: this.sessionService.isAuthenticated()
     };
   },
   created() {
@@ -37,6 +38,11 @@ export default {
       await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
     },
 
+  },
+  computed: {
+    isLoggedIn(){
+      return this.sessionService.isAuthenticated()
+    }
   }
 }
 </script>

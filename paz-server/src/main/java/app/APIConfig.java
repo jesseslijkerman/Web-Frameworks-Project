@@ -13,7 +13,6 @@ public class APIConfig implements WebMvcConfigurer {
     public Set<String> SECURED_PATHS =
             Set.of("/cabins");
 
-
     @Value("${jwt.issuer:private company}")
     private String issuer;
 

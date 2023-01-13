@@ -9,7 +9,7 @@ export class SessionSbService {
         this.RESOURCES_URL = resourceUrl;
         this.getTokenFromBrowserStorage();
 
-        //console.log("SessionSbService recovered token: ", this._currentToken")
+        console.log("SessionSbService recovered token: "+this.currentToken)
 
     }
 
