@@ -24,10 +24,19 @@
 export default {
   name: "NavBar",
   inject: ['sessionService'],
+  data() {
+    return {
+      isLoggedIn: this.sessionService.isAuthenticated()
+    };
+  },
+  created() {
+    console.log(this.isLoggedIn)
+  },
   methods: {
     async login(){
       await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
-    }
+    },
+
   }
 }
 </script>

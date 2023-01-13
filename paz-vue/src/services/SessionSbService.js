@@ -70,4 +70,8 @@ export class SessionSbService {
         console.log("Current Account:", this.currentAccount);
         return this.currentToken;
     }
+
+    isAuthenticated() {
+        return this.currentToken != null;
+    }
 }
