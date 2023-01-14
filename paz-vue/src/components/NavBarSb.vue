@@ -15,9 +15,11 @@
     </div>
     <a class="left">Rentals</a>
     <a class="left">My Account</a>
-    <p>{{isLoggedIn}}</p>
-    <router-link to="/sign-up" class="right">Sign up</router-link>
-    <router-link to="/sign-in" class="right">Log in</router-link>
+    <div v-if="!isLoggedIn">
+      <router-link to="/sign-up" class="right">Sign up</router-link>
+      <router-link to="/sign-in" class="right">Log in</router-link>
+    </div>
+    <a v-else @click="signOut" class="right">Log out</a>
   </div>
 </template>
 
@@ -25,11 +27,6 @@
 export default {
   name: "NavBar",
   inject: ['sessionService'],
-  data() {
-    return {
-      //isLoggedIn: this.sessionService.isAuthenticated()
-    };
-  },
   created() {
     console.log(this.isLoggedIn)
   },
@@ -37,11 +34,19 @@ export default {
     async login(){
       await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
     },
-
+    signOut(){
+      this.sessionService.signOut()
+      this.$router().push("/")
+    }
   },
   computed: {
     isLoggedIn(){
       return this.sessionService.isAuthenticated()
+    }
+  },
+  watch:{
+    '$route'(){
+      //this.reInitialise();
     }
   }
 }
