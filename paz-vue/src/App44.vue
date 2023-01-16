@@ -12,6 +12,7 @@ import CONFIG from '../app-config.js'
 import NavBarSb from "@/components/NavBarSb";
 import {CabinsAdaptor} from "@/services/CabinsAdaptor";
 import HeaderSb from "@/components/HeaderSb";
+import {FetchInterceptor} from "@/services/FetchInterceptor";
 
 export default {
   name: "App44",
@@ -19,15 +20,22 @@ export default {
   provide() {
     //create a singleton reactive service tracking the authorisation data of the session
     this.theSessionSbService = shallowReactive(
-        new SessionSbService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM)
-    );
+        new SessionSbService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM));
+    this.theFetchInterceptor =
+        new FetchInterceptor(this.theSessionSbService, this.$router);
     return{
       // stateless data services adaptor singletons
       cabinsService: new CabinsAdaptor(CONFIG.BACKEND_URL+ "/cabins"),
 
       // reactive, stateful services
       sessionService: this.theSessionSbService,
+
+      fetchInterceptor: this.theFetchInterceptor
     }
+  },
+  unmounted() {
+    console.log("App.unmounted() has been called");
+    this.theFetchInterceptor.unregister();
   }
 }
 </script>
