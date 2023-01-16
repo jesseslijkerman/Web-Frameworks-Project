@@ -13,7 +13,7 @@
     </div>
     <div class="right-side">
       <div class="welcome">
-        <p>Welcome {{this.username}}</p>
+        <p>Welcome {{getAccountFromLocalStorage}}</p>
         <button @click="signOut">log out</button>
       </div>
       <img class="image" id="zeester" src="../assets/zeester.png">
@@ -50,7 +50,7 @@ export default {
     this.getAccountFromLocalStorage()
   },
   methods: {
-    getCurrentDate(){
+    getCurrentDate() {
       const date = new Date();
       const options = {
         dateStyle: "full",
@@ -59,21 +59,28 @@ export default {
       console.log(currentDate)
       return currentDate;
     },
-    async signIn(){
-      await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
-    },
-    async signOut(){
+    async signOut() {
       await this.sessionService.signOut()
     },
-    getAccountFromLocalStorage(){
+    // getAccountFromLocalStorage() {
+    //   let data = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
+    //   if (data == null) {
+    //     return "visitor"
+    //   } else {
+    //     this.currentAccount = JSON.parse(data)
+    //     return this.currentAccount.name
+    //   }
+    // }
+  },
+  computed: {
+    getAccountFromLocalStorage() {
       let data = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
-      if (data == null){
-        this.username = "visitor"
-        return
+      if (data == null) {
+        return "visitor"
+      } else {
+        let currentAccount = JSON.parse(data)
+        return currentAccount.name
       }
-
-      this.currentAccount = JSON.parse(data)
-      this.username = this.currentAccount.name
     }
   }
 }
