@@ -13,7 +13,7 @@
     </div>
     <div class="right-side">
       <div class="welcome">
-        <p>Welcome {{getAccountFromLocalStorage}}</p>
+        <p>Welcome {{username}}</p>
         <button @click="signOut">log out</button>
       </div>
       <img class="image" id="zeester" src="../assets/zeester.png">
@@ -62,24 +62,13 @@ export default {
     async signOut() {
       await this.sessionService.signOut()
     },
-    // getAccountFromLocalStorage() {
-    //   let data = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
-    //   if (data == null) {
-    //     return "visitor"
-    //   } else {
-    //     this.currentAccount = JSON.parse(data)
-    //     return this.currentAccount.name
-    //   }
-    // }
-  },
-  computed: {
     getAccountFromLocalStorage() {
       let data = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
       if (data == null) {
-        return "visitor"
+        this.username = "visitor"
       } else {
-        let currentAccount = JSON.parse(data)
-        return currentAccount.name
+        this.currentAccount = JSON.parse(data)
+        this.username = this.currentAccount.name
       }
     }
   }
