@@ -21,8 +21,8 @@ export default {
     //create a singleton reactive service tracking the authorisation data of the session
     this.theSessionSbService = shallowReactive(
         new SessionSbService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM))
-    // this.theFetchInterceptor =
-    //     new FetchInterceptor(this.theSessionSbService, this.$router);
+    this.theFetchInterceptor =
+        new FetchInterceptor(this.theSessionSbService, this.$router);
     return{
       // stateless data services adaptor singletons
       cabinsService: new CabinsAdaptor(CONFIG.BACKEND_URL+ "/cabins"),

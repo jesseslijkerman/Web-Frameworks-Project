@@ -21,7 +21,10 @@ export class SessionSbService {
         const body = JSON.stringify({email: email, password: password});
         let response = await fetch(this.RESOURCES_URL + "/login", {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Authorization': 'Bearer <token>',
+                'Content-Type': 'application/json'
+            },
             body: body,
             credentials: 'include',
             })

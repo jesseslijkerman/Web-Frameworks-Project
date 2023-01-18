@@ -15,11 +15,11 @@ export class FetchInterceptor{
         this.unregister = fetchIntercept.register(this)
 
         console.log("FetchInterceptor has been registered; current token = " +
-            FetchInterceptor.theInstance.session.getTokenFromBrowserStorage())
+            FetchInterceptor.theInstance.session.currentToken)
     }
 
     request(url, options) {
-        let token = FetchInterceptor.theInstance.session.getTokenFromBrowserStorage()
+        let token = FetchInterceptor.theInstance.session.currentToken
 
         if (token == null) {
             // no change
@@ -37,7 +37,37 @@ export class FetchInterceptor{
             return  [url, newOptions]
         }
     }
-    requestError(error) {}
-    response(response) {}
-    responseError(error) {}
+
+    requestError(error) {
+        // Called when an error occured during another 'request' interceptor call
+        console.log("FetchInterceptor requestError: ", error);
+        return Promise.reject(error);
+    }
+
+    response(response) {
+        console.log("FetchInterceptor response: ", response);
+        FetchInterceptor.theInstance.tryRecoverNewJWToken(response);
+        if (response.status >= 400 && response.status < 600) {
+            FetchInterceptor.theInstance.handleErrorInResponse(response);
+        }
+        return response;
+    }
+
+    responseError(error) {
+        // Handle a fetch error
+        console.log("FetchInterceptor responseError: ", error);
+        return Promise.reject(error);
+    }
+
+    async handleErrorInResponse(response){
+        if (response.status == 401){
+            this.router.push("/sign-in")
+        }
+    }
+
+    tryRecoverNewJWToken(response){
+        let token = response.headers.get('Authorization')
+        console.log(token)
+        return token
+    }
 }
