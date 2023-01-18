@@ -36,7 +36,7 @@ export default {
     },
     signOut(){
       this.sessionService.signOut()
-      this.$router().push("/sign-in")
+      this.$router.push("/sign-in")
     }
   },
   computed: {

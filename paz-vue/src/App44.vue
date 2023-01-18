@@ -20,9 +20,9 @@ export default {
   provide() {
     //create a singleton reactive service tracking the authorisation data of the session
     this.theSessionSbService = shallowReactive(
-        new SessionSbService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM));
-    this.theFetchInterceptor =
-        new FetchInterceptor(this.theSessionSbService, this.$router);
+        new SessionSbService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM))
+    // this.theFetchInterceptor =
+    //     new FetchInterceptor(this.theSessionSbService, this.$router);
     return{
       // stateless data services adaptor singletons
       cabinsService: new CabinsAdaptor(CONFIG.BACKEND_URL+ "/cabins"),
@@ -30,12 +30,12 @@ export default {
       // reactive, stateful services
       sessionService: this.theSessionSbService,
 
-      fetchInterceptor: this.theFetchInterceptor
+      // fetchInterceptor: this.theFetchInterceptor
     }
   },
   unmounted() {
     console.log("App.unmounted() has been called");
-    this.theFetchInterceptor.unregister();
+    //this.theFetchInterceptor.unregister();
   }
 }
 </script>

@@ -13,8 +13,7 @@
     </div>
     <div class="right-side">
       <div class="welcome">
-        <p>Welcome {{username}}</p>
-        <button @click="signOut">log out</button>
+        <p>Welcome {{currentAccount != null? currentAccount.name : "visitor"}}</p>
       </div>
       <img class="image" id="zeester" src="../assets/zeester.png">
     </div>
@@ -42,12 +41,11 @@ export default {
       siteName: "Play & Stay aan Zee",
       image: "../assets/header.jpg",
       currentDate: "",
-      currentAccount: null,
-      username: ""
+      currentAccount: null
     };
   },
   created() {
-    this.getAccountFromLocalStorage()
+    this.currentAccount = this.sessionService.currentAccount
   },
   methods: {
     getCurrentDate() {
@@ -61,16 +59,16 @@ export default {
     },
     async signOut() {
       await this.sessionService.signOut()
-    },
-    getAccountFromLocalStorage() {
-      let data = window.sessionStorage.getItem("JWT_PLAY_AAN_ZEE_ACC")
-      if (data == null) {
-        this.username = "visitor"
-      } else {
-        this.currentAccount = JSON.parse(data)
-        this.username = this.currentAccount.name
-      }
     }
+  },
+  watch : {
+    sessionService: {
+      handler: function (newVal, oldVal){
+        this.currentAccount = newVal.currentAccount
+      },
+      deep: true
+    }
+
   }
 }
 
