@@ -8,7 +8,6 @@
 import {SessionSbService} from "@/services/SessionSbService";
 import {reactive, shallowReactive} from "vue";
 import CONFIG from '../app-config.js'
-
 import NavBarSb from "@/components/NavBarSb";
 import {CabinsAdaptor} from "@/services/CabinsAdaptor";
 import HeaderSb from "@/components/HeaderSb";
@@ -22,7 +21,7 @@ export default {
     this.theSessionSbService = shallowReactive(
         new SessionSbService(CONFIG.BACKEND_URL + "/authentication", CONFIG.JWT_STORAGE_ITEM))
     this.theFetchInterceptor =
-        new FetchInterceptor(this.theSessionSbService, this.$router);
+        new FetchInterceptor(this.theSessionSbService, this.$router); //24 en 25 kapot
     return{
       // stateless data services adaptor singletons
       cabinsService: new CabinsAdaptor(CONFIG.BACKEND_URL+ "/cabins"),
