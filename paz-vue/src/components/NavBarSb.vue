@@ -31,9 +31,6 @@ export default {
     console.log(this.isLoggedIn)
   },
   methods: {
-    async login(){
-      await this.sessionService.asyncSignIn("piet@hva.nl", "piet")
-    },
     signOut(){
       this.sessionService.signOut()
       this.$router.push("/sign-in")
@@ -42,11 +39,6 @@ export default {
   computed: {
     isLoggedIn(){
       return this.sessionService.isAuthenticated()
-    }
-  },
-  watch:{
-    '$route'(){
-      //this.reInitialise();
     }
   }
 }
