@@ -6,7 +6,7 @@
            v-bind:key="cabin.id"
            @click="selectCabin(cabin)">
         <img :src="cabin.image">
-        <p>{{ cabin.type }}</p>
+        <p>{{ cabin.cabinType }}</p>
         <p>{{ cabin.location }}</p>
       </div>
     </div>
@@ -50,30 +50,23 @@ export default {
         this.$router.push("/overview37/"+cabin.id)
       }
     },
-    deleteSelectedCabin(cabinId){
-      console.log("iets")
-      for (let i = 0; i < this.cabins.length; i++) {
-        if (this.cabins[i].id === cabinId){
-          this.cabins.splice(i, 1)
-          this.selectedCabin = null;
-        }
-      }
-    },
     findSelectedFromRouteParam(route){
-      console.log(route.params.cabinId)
-      let cabinId = route.params.cabinId
-      let selectedCabin
-
-      for (let i = 0; i < this.cabins.length; i++) {
-        if (this.cabins[i].id === cabinId){
-          selectedCabin = this.cabins[i]
-        }
-      }
-      return selectedCabin;
+      // console.log(route.params.cabinId)
+      // let cabinId = route.params.cabinId
+      // let selectedCabin
+      //
+      // for (let i = 0; i < this.cabins.length; i++) {
+      //   if (this.cabins[i].id === cabinId){
+      //     selectedCabin = this.cabins[i]
+      //   }
+      // }
+      // return selectedCabin;
+      console.log("findSelectedFromRouteParam + " + this.$route?.params?.cabinId)
+      return this.cabins.find(value => value.id === parseInt(this.$route?.params?.cabinId));
     },
     async onReload(){
       this.cabins = await this.cabinsService.asyncFindAll();
-      this.selectedCabin = this.findSelectedFromRouteParam(this.$route?.params?.cabinId)
+      this.selectedCabin = this.findSelectedFromRouteParam(this.$route)
     }
   }
 }

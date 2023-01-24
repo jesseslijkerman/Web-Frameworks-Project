@@ -2,7 +2,7 @@
   <h3>Cabin details (id={{this.cabinCopy.id}})</h3>
   <form @submit.prevent="saveCabin">
     <label for="type">Type</label>
-    <select id="type" name="type" v-model="this.cabinCopy.type">
+    <select id="type" name="type" v-model="this.cabinCopy.cabinType">
       <option value="BeachGear">Beach Gear</option>
       <option value="SmallDayTime">Small Day Time</option>
       <option value="SmallLodge">Small Lodge</option>
@@ -54,6 +54,7 @@ export default {
       this.$emit("refresh")
     },
     async saveCabin(){
+      console.log(this.cabinCopy)
       await this.cabinsService.asyncSave(JSON.stringify(this.cabinCopy))
       this.$router.push("/overview37")
       this.$emit("refresh")
@@ -82,7 +83,7 @@ export default {
     async reInitialise(){
       this.selectedCabin =
           await this.cabinsService.asyncFindById(this.$route?.params?.cabinId)
-      console.log(this.$route.params?.cabinId)
+      console.log("reInitialise" + this.$route.params?.cabinId)
       this.cabinCopy = Cabin.copyConstructor(this.selectedCabin)
       console.log(this.cabinCopy)
     }
@@ -99,6 +100,7 @@ export default {
   },
   watch:{
     '$route'(){
+      console.log("$route + " + this.$route?.params?.cabinId)
       if (this.$route?.params?.cabinId != null){
         this.reInitialise();
       }

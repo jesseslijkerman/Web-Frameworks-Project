@@ -3,7 +3,7 @@
     <div class="scroll">
       <div :class="['card', { 'selected' : selectedCabin === cabin }]" v-for="cabin in cabins" v-bind:key="cabin.id" @click="selectCabin(cabin)">
         <img :src="cabin.image">
-        <p>{{ cabin.type }}</p>
+        <p>{{ cabin.cabinType }}</p>
         <p>{{ cabin.location }}</p>
       </div>
     </div>

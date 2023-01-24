@@ -9,7 +9,7 @@
       <th>Number available</th>
     </tr>
     <tr v-for="cabin in cabins" v-bind:key="cabin.id">
-      <td>{{ cabin.type }}</td>
+      <td>{{ cabin.cabinType }}</td>
       <td>{{ cabin.location }}</td>
       <td>{{ cabin.description }}</td>
       <td>{{ cabin.pricePerWeek }}</td>

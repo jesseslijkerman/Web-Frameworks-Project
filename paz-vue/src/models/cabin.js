@@ -8,7 +8,7 @@ const Type = {
 
 export class Cabin {
     id;
-    type;
+    cabinType;
     location;
     description;
     image;
@@ -17,7 +17,7 @@ export class Cabin {
 
     constructor(id, type, location, description, image, pricePerWeek, numAvailable) {
         this.id = id;
-        this.type = type;
+        this.cabinType = type;
         this.location = location;
         this.description = description;
         this.image = image;
@@ -45,19 +45,19 @@ export class Cabin {
 
         switch (typeSelector) {
             case 0:
-                type = Type.BeachGear
+                type = "BeachGear"
                 break;
             case 1:
-                type = Type.SmallDayTime
+                type = "SmallDayTime"
                 break;
             case 2:
-                type = Type.SmallLodge
+                type = "SmallLodge"
                 break;
             case 3:
-                type = Type.LargeLodge
+                type = "LargeLodge"
                 break;
             case 4:
-                type = Type.FamilyLodge
+                type = "FamilyLodge"
                 break;
         }
 
@@ -193,7 +193,10 @@ export class Cabin {
             return null
         }
 
+
         // Copies properties from selected cabin to a new cabin
-        return Object.assign(new Cabin(0), cabin);
+        let newCabin = Object.assign(new Cabin(0), cabin);
+        console.log(newCabin)
+        return newCabin;
     }
 }

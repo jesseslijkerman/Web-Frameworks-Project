@@ -2,7 +2,7 @@
   <h3>Cabin details (id={{this.cabinCopy.id}})</h3>
   <form @submit.prevent="saveCabin">
     <label for="type">Type</label>
-    <select id="type" name="type" v-model="this.cabinCopy.type">
+    <select id="type" name="type" v-model="this.cabinCopy.cabinType">
       <option value="BeachGear">Beach Gear</option>
       <option value="SmallDayTime">Small Day Time</option>
       <option value="SmallLodge">Small Lodge</option>
@@ -58,7 +58,7 @@ export default {
       this.$router.push("/overview34")
     },
     saveCabin(){
-      this.selectedCabin.type = this.cabinCopy.type
+      this.selectedCabin.cabinType = this.cabinCopy.cabinType
       this.selectedCabin.location = this.cabinCopy.location
       this.selectedCabin.description = this.cabinCopy.description
       this.selectedCabin.image = this.cabinCopy.image

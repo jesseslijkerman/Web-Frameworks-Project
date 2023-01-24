@@ -2,7 +2,7 @@
   <h3>Cabin details (id={{selectedCabin.id}})</h3>
   <form>
     <label for="type">Type</label>
-    <select id="type" name="type" v-model="selectedCabin.type">
+    <select id="type" name="type" v-model="selectedCabin.cabinType">
       <option value="BeachGear">Beach Gear</option>
       <option value="SmallDayTime">Small Day Time</option>
       <option value="SmallLodge">Small Lodge</option>
