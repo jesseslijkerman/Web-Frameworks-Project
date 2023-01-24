@@ -4,7 +4,7 @@
       <div :class="['card', { 'selected' : selectedCabin === cabin }]"
            v-for="cabin in cabins"
            v-bind:key="cabin.id"
-           @click="onSelect(cabin)">
+           @click="selectCabin(cabin)">
         <img :src="cabin.image">
         <p>{{ cabin.type }}</p>
         <p>{{ cabin.location }}</p>
@@ -34,18 +34,6 @@ export default {
     }
   },
   methods: {
-    onSelect(cabin) {
-      // find the parent path by dropping any trailing /NNN from the route path
-      let parentPath = this.$route?.fullPath.replace(new RegExp("/\\d*$"),'');
-      if (cabin != null && cabin !== this.selectedCabin) {
-        // navigate to new child route
-        this.$router.push(parentPath + "/" + cabin.id);
-        this.selectedCabin = cabin;
-      } else {
-        // navigate to parent route
-        this.$router.push(parentPath);
-      }
-    },
     async onNewCabin() {
       let newCabin = await this.cabinsService.asyncSave(JSON.stringify(Cabin.createSampleCabin(0)));
       console.log(newCabin)
@@ -56,7 +44,9 @@ export default {
     selectCabin(cabin){
       if (this.selectedCabin === cabin){
         this.$router.push("/overview37");
+        this.selectedCabin = null;
       } else {
+        this.selectedCabin = cabin;
         this.$router.push("/overview37/"+cabin.id)
       }
     },
@@ -84,11 +74,6 @@ export default {
     async onReload(){
       this.cabins = await this.cabinsService.asyncFindAll();
       this.selectedCabin = this.findSelectedFromRouteParam(this.$route?.params?.cabinId)
-    }
-  },
-  watch:{
-    '$route'(){
-      this.selectedCabin = this.cabins.find(x=>x.id==this.$route.params.cabinId)
     }
   }
 }

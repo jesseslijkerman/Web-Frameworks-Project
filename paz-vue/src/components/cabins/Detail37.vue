@@ -84,6 +84,7 @@ export default {
           await this.cabinsService.asyncFindById(this.$route?.params?.cabinId)
       console.log(this.$route.params?.cabinId)
       this.cabinCopy = Cabin.copyConstructor(this.selectedCabin)
+      console.log(this.cabinCopy)
     }
   },
   data(){
@@ -98,7 +99,9 @@ export default {
   },
   watch:{
     '$route'(){
-      this.reInitialise();
+      if (this.$route?.params?.cabinId != null){
+        this.reInitialise();
+      }
     }
   }
 
