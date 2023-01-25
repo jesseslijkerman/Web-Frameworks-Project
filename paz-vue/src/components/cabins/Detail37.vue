@@ -60,10 +60,7 @@ export default {
       this.$emit("refresh")
     },
     resetCabin(){
-      console.log(this.originalData)
-      console.log(this.hasChanged())
       this.cabinCopy = Object.assign(new Cabin(0), this.originalData)
-      console.log(this.cabinCopy)
 
     },
     clearCabin(){
@@ -86,7 +83,6 @@ export default {
       console.log("reInitialise" + this.$route.params?.cabinId)
       this.cabinCopy = Cabin.copyConstructor(this.selectedCabin)
       this.originalData = Cabin.copyConstructor(this.selectedCabin)
-      console.log(this.cabinCopy)
     }
   },
   data(){

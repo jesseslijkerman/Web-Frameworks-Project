@@ -12,8 +12,8 @@
     </div>
   </div>
   <button @click="onNewCabin">Add Cabin</button>
-  <p v-if="selectedCabin == null">Select a cabin for details</p>
-  <router-view v-else @refresh="onReload"></router-view>
+  <p v-show="selectedCabin == null">Select a cabin for details</p>
+  <router-view v-show="selectedCabin != null" @refresh="onReload"></router-view>
 </template>
 
 <script>
@@ -31,6 +31,12 @@ export default {
       lastId: 0,
       cabins: [],
       selectedCabin: null
+    }
+  },
+  watch: {
+    '$route'() {
+      // extracts the selected cabin-id from the route, each time when the route has changed
+      this.selectedCabin = this.findSelectedFromRouteParam(this.$route?.params?.id);
     }
   },
   methods: {
@@ -63,10 +69,11 @@ export default {
       // return selectedCabin;
       console.log("findSelectedFromRouteParam + " + this.$route?.params?.cabinId)
       return this.cabins.find(value => value.id === parseInt(this.$route?.params?.cabinId));
+
     },
     async onReload(){
       this.cabins = await this.cabinsService.asyncFindAll();
-      this.selectedCabin = this.findSelectedFromRouteParam(this.$route)
+      this.selectedCabin = this.findSelectedFromRouteParam()
     }
   }
 }
