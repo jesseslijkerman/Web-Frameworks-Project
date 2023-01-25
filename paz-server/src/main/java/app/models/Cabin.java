@@ -3,6 +3,7 @@ package app.models;
 import app.views.CustomViews;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -34,7 +35,7 @@ public class Cabin {
     private double pricePerWeek;
     @JsonView(CustomViews.Summary.class)
     private int numAvailable;
-    @OneToMany(mappedBy = "cabin")
+    @OneToMany(mappedBy = "cabin", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonManagedReference
     private List<Rental> rentals = new ArrayList<>();
 

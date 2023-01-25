@@ -15,9 +15,9 @@ export class Cabin {
     pricePerWeek;
     numAvailable;
 
-    constructor(id, type, location, description, image, pricePerWeek, numAvailable) {
+    constructor(id, cabinType, location, description, image, pricePerWeek, numAvailable) {
         this.id = id;
-        this.cabinType = type;
+        this.cabinType = cabinType;
         this.location = location;
         this.description = description;
         this.image = image;
@@ -31,33 +31,33 @@ export class Cabin {
 
     static createSampleCabin(pId = 0) {
 
-        let type;
+        let cabinType;
         let location;
         let image;
         let description;
         let price;
 
-        let typeSelector = Cabin.getRandomInt(5);
+        let cabinTypeSelector = Cabin.getRandomInt(5);
         let locationSelector = Cabin.getRandomInt(6);
         let imageSelector = Cabin.getRandomInt(6);
         let descriptionSelector = Cabin.getRandomInt(6);
         let numAvailable = Cabin.getRandomInt(50);
 
-        switch (typeSelector) {
+        switch (cabinTypeSelector) {
             case 0:
-                type = "BeachGear"
+                cabinType = "BeachGear"
                 break;
             case 1:
-                type = "SmallDayTime"
+                cabinType = "SmallDayTime"
                 break;
             case 2:
-                type = "SmallLodge"
+                cabinType = "SmallLodge"
                 break;
             case 3:
-                type = "LargeLodge"
+                cabinType = "LargeLodge"
                 break;
             case 4:
-                type = "FamilyLodge"
+                cabinType = "FamilyLodge"
                 break;
         }
 
@@ -103,32 +103,32 @@ export class Cabin {
                 break;
         }
 
-        if (type === Type.BeachGear) {
+        if (cabinType === Type.BeachGear) {
             description = ""
         } else {
             switch (descriptionSelector) {
                 case 0:
-                    description = "Colorful " + type + " with a great view."
+                    description = "Colorful " + cabinType + " with a great view."
                     break;
                 case 1:
-                    description = "This " + type + " in " + location + "is a great place to relax."
+                    description = "This " + cabinType + " in " + location + "is a great place to relax."
                     break;
                 case 2:
-                    description = "Spacy " + type + " on the beach of " + location + "."
+                    description = "Spacy " + cabinType + " on the beach of " + location + "."
                     break;
                 case 3:
-                    description = "Comfortable " + type + ", comes with a fridge."
+                    description = "Comfortable " + cabinType + ", comes with a fridge."
                     break;
                 case 4:
-                    description = type + " in " + location + " where dreams come true."
+                    description = cabinType + " in " + location + " where dreams come true."
                     break;
                 case 5:
-                    description = "Modern " + type + " where you can enjoy the " + location + " beach."
+                    description = "Modern " + cabinType + " where you can enjoy the " + location + " beach."
                     break;
             }
         }
 
-        if (type === Type.BeachGear) {
+        if (cabinType === Type.BeachGear) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 100;
@@ -140,7 +140,7 @@ export class Cabin {
                     price = 150;
                     break;
             }
-        } else if (type === Type.SmallDayTime) {
+        } else if (cabinType === Type.SmallDayTime) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 300;
@@ -151,7 +151,7 @@ export class Cabin {
                 case 2:
                     price = 410;
             }
-        } else if (type === Type.SmallLodge) {
+        } else if (cabinType === Type.SmallLodge) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 400;
@@ -162,7 +162,7 @@ export class Cabin {
                 case 2:
                     price = 500;
             }
-        } else if (type === Type.LargeLodge) {
+        } else if (cabinType === Type.LargeLodge) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 750;
@@ -173,7 +173,7 @@ export class Cabin {
                 case 2:
                     price = 850;
             }
-        } else if (type === Type.FamilyLodge) {
+        } else if (cabinType === Type.FamilyLodge) {
             switch (Cabin.getRandomInt(3)) {
                 case 0:
                     price = 1000;
@@ -185,7 +185,7 @@ export class Cabin {
                     price = 1500;
             }
         }
-        return new Cabin(pId, type, location, description, image, price, numAvailable);
+        return new Cabin(pId, cabinType, location, description, image, price, numAvailable);
     }
 
     static copyConstructor(cabin){
