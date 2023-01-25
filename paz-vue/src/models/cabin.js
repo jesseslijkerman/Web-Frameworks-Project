@@ -195,8 +195,6 @@ export class Cabin {
 
 
         // Copies properties from selected cabin to a new cabin
-        let newCabin = Object.assign(new Cabin(0), cabin);
-        console.log(newCabin)
-        return newCabin;
+        return Object.assign(new Cabin(0), cabin);
     }
 }
