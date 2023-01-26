@@ -74,7 +74,7 @@ public class CabinsController {
         return cabin;
     }
 
-    @PostMapping(path = "")
+    @PostMapping(path = "", consumes = {"application/json"})
     public ResponseEntity<Object> createCabin(@RequestBody Cabin cabin){
         cabinsRepo.save(cabin);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cabin.getId()).toUri();
@@ -82,7 +82,7 @@ public class CabinsController {
         return ResponseEntity.created(location).body(cabin);
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/{id}", consumes = {"application/json"})
     public Cabin editCabin(@PathVariable int id, @RequestBody Cabin cabin){
         if (cabin.getId() != id){
             throw new PreConditionFailed("id-" + id + " doesn't match id of body");

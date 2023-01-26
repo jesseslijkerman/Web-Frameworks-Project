@@ -61,7 +61,6 @@ export default {
     },
     resetCabin(){
       this.cabinCopy = Object.assign(new Cabin(0), this.originalData)
-
     },
     clearCabin(){
       this.cabinCopy.type = ""
@@ -98,10 +97,10 @@ export default {
   watch:{
     '$route'(){
       console.log("$route + " + this.$route?.params?.cabinId)
-      // if (this.$route?.params?.cabinId != null){
-      //   this.reInitialise();
-      // }
-      this.reInitialise();
+      if (this.$route?.params?.cabinId != null){
+        this.reInitialise();
+      }
+      //this.reInitialise();
     }
   }
 

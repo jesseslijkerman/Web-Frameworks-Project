@@ -11,7 +11,7 @@ import java.util.Set;
 @Configuration
 public class APIConfig implements WebMvcConfigurer {
     public Set<String> SECURED_PATHS =
-            Set.of("/cabins");
+            Set.of("/iets");
 
     @Value("${jwt.issuer:private company}")
     private String issuer;

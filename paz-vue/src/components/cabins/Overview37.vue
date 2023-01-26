@@ -41,8 +41,11 @@ export default {
   },
   methods: {
     async onNewCabin() {
-      console.log(await this.cabinsService.asyncSave(JSON.stringify(Cabin.createSampleCabin(0))))
-      let newCabin = await this.cabinsService.asyncSave(JSON.stringify(Cabin.createSampleCabin(0)));
+      console.log(JSON.stringify(Cabin.createSampleCabin(0)))
+      console.log(Cabin.createSampleCabin(0))
+
+      let cabin = Cabin.createSampleCabin(0)
+      let newCabin = await this.cabinsService.asyncSave(JSON.stringify(cabin));
       this.cabins.push(newCabin)
       this.selectedCabin = newCabin;
       this.$router.push("/overview37/" + newCabin.id)
