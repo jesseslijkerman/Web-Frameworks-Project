@@ -13,7 +13,7 @@
   </div>
   <button @click="onNewCabin">Add Cabin</button>
   <p v-show="selectedCabin == null">Select a cabin for details</p>
-  <router-view v-show="selectedCabin != null" @refresh="onReload"></router-view>
+  <router-view v-show="selectedCabin != null" @refresh="onReload" @delete="deleteCabin"></router-view>
 </template>
 
 <script>
@@ -36,19 +36,15 @@ export default {
   watch: {
     '$route'() {
       // extracts the selected cabin-id from the route, each time when the route has changed
-      this.selectedCabin = this.findSelectedFromRouteParam(this.$route?.params?.id);
+      this.selectedCabin = this.findSelectedFromRouteParam();
     }
   },
   methods: {
     async onNewCabin() {
-      console.log(JSON.stringify(Cabin.createSampleCabin(0)))
-      console.log(Cabin.createSampleCabin(0))
-
       let cabin = Cabin.createSampleCabin(0)
       let newCabin = await this.cabinsService.asyncSave(JSON.stringify(cabin));
-      this.cabins.push(newCabin)
-      this.selectedCabin = newCabin;
-      this.$router.push("/overview37/" + newCabin.id)
+      await this.onReload()
+      this.selectCabin(this.cabins[this.cabins.length - 1])
     },
     selectCabin(cabin){
       if (this.selectedCabin === cabin){
@@ -59,24 +55,22 @@ export default {
         this.$router.push("/overview37/"+cabin.id)
       }
     },
-    findSelectedFromRouteParam(route){
-      // console.log(route.params.cabinId)
-      // let cabinId = route.params.cabinId
-      // let selectedCabin
-      //
-      // for (let i = 0; i < this.cabins.length; i++) {
-      //   if (this.cabins[i].id === cabinId){
-      //     selectedCabin = this.cabins[i]
-      //   }
-      // }
-      // return selectedCabin;
-      console.log("findSelectedFromRouteParam + " + this.$route?.params?.cabinId)
+    findSelectedFromRouteParam(){
       return this.cabins.find(value => value.id === parseInt(this.$route?.params?.cabinId));
 
     },
     async onReload(){
       this.cabins = await this.cabinsService.asyncFindAll();
-      this.selectedCabin = this.findSelectedFromRouteParam()
+      this.selectedCabin = this.findSelectedFromRouteParam();
+    },
+    deleteCabin(){
+      for (let i = 0; i < this.cabins.length; i++) {
+        if (this.cabins[i].id === this.selectedCabin.id){
+          this.cabins.splice(i, 1)
+          this.selectedCabin = null;
+        }
+      }
+
     }
   }
 }

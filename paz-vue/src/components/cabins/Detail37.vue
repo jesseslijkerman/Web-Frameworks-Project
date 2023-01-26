@@ -46,12 +46,13 @@ import {Cabin} from "@/models/cabin";
 export default {
   name: "CabinDetail37",
   inject: ["cabinsService"],
-  emits: ["refresh"],
+  emits: ["refresh", "delete"],
   methods: {
     async deleteCabin() {
       await this.cabinsService.asyncDeleteById(this.selectedCabin.id)
       this.$router.push("/overview37")
-      this.$emit("refresh")
+      this.$emit("delete")
+     // this.$router.push("/overview37")
     },
     async saveCabin(){
       console.log(this.cabinCopy)
@@ -79,7 +80,6 @@ export default {
     async reInitialise(){
       this.selectedCabin =
           await this.cabinsService.asyncFindById(this.$route?.params?.cabinId)
-      console.log("reInitialise" + this.$route.params?.cabinId)
       this.cabinCopy = Cabin.copyConstructor(this.selectedCabin)
       this.originalData = Cabin.copyConstructor(this.selectedCabin)
     }
@@ -100,7 +100,6 @@ export default {
       if (this.$route?.params?.cabinId != null){
         this.reInitialise();
       }
-      //this.reInitialise();
     }
   }
 

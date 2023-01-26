@@ -55,7 +55,6 @@ export default {
       }
     },
     deleteSelectedCabin(cabinId){
-      console.log("iets")
       for (let i = 0; i < this.cabins.length; i++) {
         if (this.cabins[i].id === cabinId){
           this.cabins.splice(i, 1)
